@@ -1,0 +1,178 @@
+
+.timings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: black;
+    color: var(--text-color);
+    text-align: center;
+    background-color: var(--primary-color);
+    position: relative;
+    gap: 3rem;
+    margin-bottom:20rem;
+    padding-top:4rem;
+    padding-bottom:4rem;
+    /* margin-top: 5rem; */
+    /* background: yellow; */
+}
+
+.timings h3{
+    font-size: 6rem;
+    font-weight: 200;
+    line-height: 0rem;
+    margin-top: 2rem;
+    /* transform: translateY(-3rem); */
+}
+.weekday{
+    /* transform: translateY(-3rem); */
+}
+.weekday .day{
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+.weekday .time{
+    font-size: 1.4rem;
+    line-height: 0rem;
+}
+.weekend{
+    /* transform: translateY(-3rem); */
+    z-index: 2;
+}
+.weekend .day{
+    font-size: 1.8rem;
+    font-weight: 900;
+}
+.weekend .time{
+    font-size: 1.4rem;
+    line-height: 0rem;
+}
+
+.timing-design-up{
+    display: none;
+}
+
+.timing-design-down{
+    width:100%;
+    position: absolute;
+    bottom:-13rem;
+}
+
+
+@media screen and (max-width:992px) {
+    .timings{
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* align-items: center; */
+        /* justify-content: space-evenly; */
+        /* background-color: black; */
+        /* color: var(--text-color); */
+        /* text-align: center; */
+        /* background-color: var(--primary-color); */
+        /* position: relative; */
+        gap: 0rem;
+        height: 22rem;
+        padding-top: 0rem;
+    }
+    
+    .timings h3{
+        /* font-size: 5rem; */
+        /* font-weight: 200; */
+        /* line-height: 0rem; */
+        /* transform: translateY(-3rem); */
+    }
+    .weekday{
+        /* transform: translateY(-3rem); */
+        margin-top: 3rem;
+    }
+    /* .weekday .day{
+        font-size: 1.6rem;
+        font-weight: 900;
+    } */
+    /* .weekday .time{
+        font-size: 1.3rem;
+        line-height: 0rem;
+    } */
+    .weekend{
+        /* transform: translateY(-3rem); */
+        z-index: 2;
+    }
+    /* .weekend .day{
+        font-size: 1.5rem;
+        font-weight: 900;
+    } */
+    /* .weekend .time{
+        font-size: 1.3rem;
+        line-height: 0rem;
+    } */
+}
+
+
+
+/* 
+#timing-cup{
+    top: 14rem;
+    left: 18rem;
+    height: 25%;
+    rotate: 327deg;
+}
+#timing-bean1{
+    top: -2rem;
+    left: 17rem;
+    height: 13%;
+    rotate: 313deg;
+}
+#timing-bean2{
+    top: 18rem;
+    left: 76rem;
+    height: 18%;
+    rotate: 354deg;
+}
+#timing-jar{
+    top: 0rem;
+    left: 76rem;
+    height: 25%;
+    rotate: 66deg;
+}
+ */
+
+@media screen and (max-width:451px) {
+    .timings{
+        height: 25rem;
+        padding-top: 2rem;
+        margin-bottom:8rem;
+    }
+    
+    .weekday{
+        margin-top: 3rem;
+    }
+    .weekday .day{
+        font-size: 1.4rem;
+    }
+    .weekday .time{
+        font-size: 1rem;
+        /* line-height: 0rem; */
+    }
+    .weekend .day{
+        font-size: 1.4rem;
+        /* font-weight: 900; */
+    }
+    .weekend .time{
+        font-size: 1rem;
+        /* line-height: 0rem; */
+    }
+
+    .timing-design-up{
+        display: inherit;
+		position: absolute;
+		top:-3rem;
+		width: 100%;
+	}
+	.timing-design-down{
+		/* width: 1200px; */
+		position: absolute;
+		/* background: red; */
+		bottom:-3rem;
+		width: 100%;
+	}
+}

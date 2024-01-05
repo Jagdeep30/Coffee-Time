@@ -1,0 +1,154 @@
+.hot-coffee{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 3rem;
+}
+.hot-coffee-design{
+    display: none;
+    position: absolute;
+    /* height: 10rem; */
+    width: 100%;
+}
+
+.hotC-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    margin-top: 5rem;
+    gap: 2rem;
+}
+
+
+.hot-head{
+    width: 50%;
+    transform: translate(0rem,-6rem);
+    text-align: center;
+    margin-top: 23rem;
+}
+.hot-head h3{
+    color: var(--text-color);
+    font-size: 9rem;
+    font-weight: 200;
+    line-height: 8rem;
+    margin-bottom: 4rem;
+}
+.hot-head button{
+    background-color: var(--primary-color);
+    font-size: 1.5rem;
+    padding: 0.8rem 2rem;
+}
+
+.hotC-content{
+    margin-top: 7rem;
+}
+
+.hotC-content img{
+    height: 25rem;
+}
+
+.hotC-content p{
+    color: var(--text-color);
+    font-size: 1rem;
+    width: 70%;
+    text-align: center;
+    line-height: 1.5rem;
+}
+
+
+
+
+
+
+@media screen and (max-width:992px) {
+    .hot-coffee{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        
+        height: 52rem;
+        padding-top: 45rem;
+    }
+    .hot-head{
+        width: 80%;
+        position: relative;
+        top: -35rem;
+    }
+    .hotC-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+        gap: 13rem;
+    }
+    .hotC-content p{
+        width: 70%;
+    }
+    .hot-coffee button{
+        margin-top: 6.5rem;
+    }
+
+    .hot-coffee-design{
+        position: absolute;
+        top: 0;
+        /* height: 10rem; */
+        width: 100%;
+    }
+}
+
+
+
+@media screen and (max-width: 451px) {
+    
+    .hot-head{
+        width: 80%;
+        position: relative;
+        top: -26rem;
+        height: 20rem;
+    }
+    .hotC-content{
+        width: 95%;
+    }
+    .hot-head h3 {
+		font-size: 4.7rem;
+	}
+
+
+
+
+    .hot-coffee {
+		/* padding-top: 15rem; */
+        padding-bottom: 5rem;
+        height: 47rem;
+        padding-top: 17rem;
+	}
+
+	.hot-head {
+		margin-top: 8rem;
+	}
+	.hotC-content {
+		width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+		gap: 8rem;
+	}
+	.hotC-content p {
+		width: 70%;
+	}
+	.hot-coffee button {
+		margin-top: 12rem;
+	}
+	.hotC-content img {
+		height: 18.5rem;
+		/* filter: drop-shadow(0px 0px 10px rgba(184, 184, 184, 0.822)); */
+	}
+    .hot-coffee-design{
+        display:none;
+    }
+	
+}

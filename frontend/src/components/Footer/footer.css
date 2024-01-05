@@ -1,0 +1,236 @@
+
+.foot{
+    display: flex;
+    justify-content: space-between;
+    
+    z-index: 2;
+    /* position: relative; */
+}
+.logo{
+    height: 3rem;
+}
+.footer{
+    color:var(--text-color);
+    padding: 0rem 2rem;
+    background-color: var(--primary-color);
+    position: relative;
+    padding-top: 4rem;
+}
+
+.info{
+    display: flex;
+    width: 50%;
+}
+.information{
+    width:40%;
+}
+.info-card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.info-card p{
+    font-size: 2rem;
+    font-weight: 900;
+}
+.info-card ul{
+    padding-left: 0rem;
+}
+.info-card ul li{
+    list-style:none;
+    margin-bottom: 0.5rem;
+    
+}
+.info-card ul li a{
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 200;
+}
+.foot-nav .navbar .menu .item a{
+    transition: all 0.3s;
+}
+.foot-nav .navbar .menu .item a:visited{
+    color: var(--text-color);
+}
+.foot-nav .navbar .menu .item a:hover{
+    color: var(--bg-color);
+}
+.foot a:hover{
+    color: var(--bg-color);
+}
+.foot a:visited{
+    color: var(--text-color);
+}
+.foot-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 2rem;
+    margin-top: 1.5rem;
+}
+
+.info-card a{
+    transition: all 500ms ;
+}
+
+.info-card a:hover{
+    color: var(--bg-color);
+    font-weight:bolder;
+}
+
+
+.social a{
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.social i{
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    transition: all .2s;
+}
+.social i:hover{
+    cursor: pointer;
+    color: var(--bg-color);
+}
+
+.footer-design-down{
+    width: 100%;
+    position: absolute;
+    top: -6.5rem;
+    padding: 0rem 0rem;
+    left: 0rem;
+} 
+
+
+
+@media screen and (max-width:992px) {
+    .footer{
+        
+    }    
+    .foot{
+        justify-content:space-evenly;
+        gap: 5rem;
+    }
+    .logo{
+        height: 50%;
+        width: 25%;
+    }
+    
+
+    .info{
+        display: flex;
+        width: 70%;
+        gap: 3rem;
+    }
+    .info-card p{
+        font-size: 1.5rem;
+    }
+    .info-card ul li a{
+        font-size: 0.8rem;
+    }
+    .foot-nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-right: 2rem;
+        margin-top: 1.5rem;
+    }
+
+    .social i{
+        font-size: 1rem;
+        margin-left: 2rem;
+        transition: all 0.5s;
+    }
+    .social i:hover{
+        cursor: pointer;
+        color: var(--bg-color);
+    }
+
+    
+    .navbar{
+        padding-top: 1.2rem;
+    }
+    .item{
+        margin-right: 2rem;
+        font-size: 1rem;
+    }
+    
+}
+
+@media screen and (max-width:451px) {
+    .footer{
+        margin-top: 13rem;
+        padding: 2rem 0 0 0;
+        margin-top: 2rem;
+        
+    }    
+    .foot{
+        flex-direction: column;
+        justify-content:center;
+        align-items: center;
+        gap: 1.5rem;
+        z-index: 2;
+    }
+    .logo{
+        height:65%;
+        width: 50%;
+        margin-left: 1.5rem;
+    }
+    
+
+    .info{
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        gap: 0rem;
+        text-align: center;
+    }
+    .info-card{
+        align-items: center;
+        width: 100%;
+    }
+    .info-card p{
+        font-size: 1.3rem;
+    }
+    .contact p{
+        display: none;
+    }
+    .contact li{
+        display: inline-block;
+        margin-left: 0.4rem;
+    }
+    .contact li:nth-child(even)::before{
+        content: "|";
+        font-size: 1rem;
+        margin-right: 0.4rem;
+    }
+    
+    .social i{
+        font-size: 1.5rem;
+        margin-left: 2rem;
+        transition: all 0.5s;
+    }
+    .social i:hover{
+        cursor: pointer;
+        color: var(--bg-color);
+    }
+    
+    
+    .foot-nav{
+        justify-content: center;
+        align-items: center;
+        margin-top: 0rem;
+        transform: translateY(-0.8rem);
+    }
+
+    .footer .navbar{
+        display: none;
+    }
+    .footer-design-down{
+        width: 100%;
+        position: relative;
+        top: -4rem;
+    } 
+}

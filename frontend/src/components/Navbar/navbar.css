@@ -1,0 +1,141 @@
+
+.navbar{
+    /* background-color: red; */
+    display: flex;
+    justify-content: space-between;
+    /* padding: 1.2rem; */
+}
+.item{
+    display: inline-block;
+    list-style: none;
+    margin-right: 3.5rem;
+    font-size: 1.2rem;
+}
+.item a:hover{
+    color: white;
+    text-shadow: 0 0 5px var(--primary-color), 0 0 15px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color), 0 0 10px var(--primary-color);
+}
+.item a{
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all .2s;
+}
+/* .item:active::before{
+    content: "";
+    height: 0.5rem;
+    width:1rem;
+    background-color: var(--primary-color);
+} */
+.logo{
+    margin-right: 2rem;
+    height: 3rem;
+}
+/* .show{
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    left: 0;
+    background: #222831;
+    z-index: 2;
+} */
+#navbarToggler{
+    /* position: absolute; */
+    /* top: 100%; */
+    /* width: 100%; */
+    left: 0;
+    background: #222831;
+    z-index: 2;
+}
+
+.myprofile{
+    height: 3rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 50%;
+    outline: 0.1rem solid whitesmoke;
+    outline-offset: 4px;
+}
+
+.profileImg{
+    height: inherit;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    transition: scale 300ms;
+}
+
+.profileImg:hover{
+    scale: 1.2;
+    cursor: pointer;
+}
+@media screen and (max-width:992px) {
+    #navbarToggler,.navbar-collapse,.collapsing{
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        left: 0%;
+        background: #222831;
+        z-index: 2;
+        box-shadow: 0px 15px 20px 0px #171b21;
+    }
+
+
+
+
+
+    .dropdown-item{
+        display: inline;
+    }
+
+    .dropdown-menu{
+        inset: 100% 0 0 10% !important;
+    }
+
+
+
+
+
+
+
+}
+
+
+
+@media screen and (max-width:450px) {
+    
+    .logo{
+        width: 50%;
+    }
+    #navbarToggler{
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        left: 0;
+        background: #222831;
+        z-index: 2;
+    }
+    .dropdown-menu{
+        inset: 112% 0 0 20% !important;
+        padding: 0.3rem 0;
+    }
+    .dropdown-menu a{
+        font-size: 0.8rem;
+    }
+    .dropdown-item{
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+
+/* 
+.show{
+
+} */
+
+.dropdown-menu{
+    position: absolute;
+    background:var(--primary-color);
+    color: var(--text-color);
+    width: fit-content;
+    height: fit-content;
+}

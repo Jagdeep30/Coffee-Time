@@ -1,0 +1,93 @@
+.voucher{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 7rem;
+    margin-bottom: 5rem;
+    gap: 5rem;
+}
+.voucher h3{
+    font-size: 7rem;
+    font-weight: 200;
+    line-height: 0rem;
+    color: var(--text-color);
+}
+.voucher button{
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding: 0.8rem 2rem;
+    transform: translateY(-3rem);
+}
+
+.branch-design-up{
+    width: 100%;
+}
+
+.voucher-img{
+    height: 25rem;
+    aspect-ratio: 2/1;
+}
+
+
+/* 
+#voucher-cup{
+    top: 24rem;
+    left: 9rem;
+    height: 13%;
+    rotate: 328deg;
+}
+#voucher-bean1{
+    top: 11rem;
+    left: 83rem;
+    height: 9%;
+    rotate: 313deg;
+}
+
+#voucher-jar{
+    top: 38rem;
+    left: 80rem;
+    height: 17%;
+    rotate: 56deg;
+} */
+
+
+@media screen and (max-width:992px) {
+    .voucher{
+        margin-top: 14rem;
+    }
+    .voucher button{
+        margin-top: 0;
+    }
+
+    .voucher-img{
+        width: 100%;
+        padding: 0 5rem;
+        margin-top: 1rem;
+    }
+}
+
+
+@media screen and (max-width:451px) {
+    .voucher{
+        margin-top: 4rem;
+        padding-top: 0rem;
+    }
+    .voucher button{
+        margin-top: 0rem;
+        font-size: 1rem;
+    }
+
+    .voucher-img{
+        width: 100%;
+        padding: 0 2rem;
+        margin-top: 0rem;
+    }
+    .voucher-img{
+        height: 12rem;
+        aspect-ratio: 2/1;
+    }
+    
+}
+
+

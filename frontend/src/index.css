@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Montserrat&display=swap');
+
+.grand-hotel{
+    font-family: Grand Hotel;
+}
+.montserrat{
+    font-family: Montserrat;
+}
+
+/* colors */
+*{
+    --text-color : #ffffff;
+    --info-text-color : #a7a9ad;
+    --primary-color : #29a19c;
+    --bg-color : #222831;
+    /* font-size: 62.5%; */
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 62.5%;
+    background-color: var(--bg-color);
+}
+/* 
+.container{
+    height: auto;
+} */
+
+html{
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}

@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+a,
+body,
+form,
+li,
+nav,
+ol,
+span,
+ul {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: initial;
+}
+
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol,
+ul {
+	list-style: none;
+}
+
+
+
+*,
+:after,
+:before {
+	box-sizing: inherit;
+}
+body {
+	font-family: Roboto, sans-serif;
+	color: #4b5563;
+}
+.demo-page {
+	margin: 0 auto;
+	display: -webkit-flex;
+	display: flex;
+}
+.demo-page .demo-page-navigation {
+	width: 18em;
+	padding: 2em 1em;
+}
+@media only screen and (max-width: 750px) {
+	.demo-page .demo-page-navigation {
+		display: none;
+	}
+}
+.demo-page .demo-page-navigation nav {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 2em;
+	background: #fff;
+	padding: 0.5em;
+	border-radius: 0.75rem;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.demo-page .demo-page-navigation a {
+	display: -webkit-flex;
+	display: flex;
+	padding: 0.75em 0.5em;
+	text-decoration: none;
+	border-radius: 0.25em;
+	color: #374151;
+	-webkit-align-items: center;
+	align-items: center;
+}
+/* .demo-page .demo-page-navigation a:hover {
+	background: #f3f4f6;
+} */
+.demo-page .demo-page-navigation a svg {
+	width: 1.25em;
+	height: 1.25em;
+	margin-right: 1em;
+	color: #1f2937;
+}
+.demo-page .demo-page-content {
+	padding: 2em 1em;
+	max-width: 100%;
+}
+
+
+.section{
+    width: 100%;
+}
+
+#pencil{
+	/* margin-left: 2rem; */
+    padding: 0.35rem;
+    border-radius: 0.3rem;
+    height: 1.7rem;
+    width: 2rem;
+	margin-right: 0;
+}
+
+#add{
+    padding: 0.35rem !important;
+    border-radius: 0.3rem;
+    height: 2rem;
+    width: 2rem;
+	margin-right: 0;
+}
+
+#pencil:hover{
+	background: #f3f4f6;
+}
+#add:hover{
+	background: #f3f4f6;
+}
+
+.editIcon{
+	display: flex;
+	align-items: center;
+}
+
+.data{
+	display: flex;
+	align-items: center;
+}
+
+
+.demo-page-navigation a{
+	display: flex;
+	justify-content: space-between;
+}
+
+a:hover{
+	cursor: pointer;
+}
+
+#icon{
+	padding: 0;
+}
