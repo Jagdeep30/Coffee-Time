@@ -13,33 +13,44 @@ const RawItemStock = (props) => {
 	const [itemName, setItemName] = useState('');
 	const [supplierID, setSupplierID] = useState('');
 	const getItems = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/getter/getItems');
+		let c = await axios.get('http://localhost:5000/api/v1/admin/items');
 		// console.log(c.data);
-		setItems(c.data);
+		setItems(c.data.data);
 	}
 	const getSuppliers = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/getter/getSuppliers');
+		let c = await axios.get('http://localhost:5000/api/v1/admin/suppliers');
 		// console.log(c.data);
-		setSuppliers(c.data);
+		setSuppliers(c.data.data);
 	}
 	const getStores = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/getter/getStores');
+		let c = await axios.get('http://localhost:5000/api/v1/admin/stores');
 		// console.log(c.data);
-		setStores(c.data);
+		setStores(c.data.data);
 	}
 
 	const params = useParams();
 	const id = params.id;
 	let result = '';
 
-	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/getter/getItemStock?id=${id}`);
+	const resetForm = () => {
+		setSuppliers([]);
+		setPrice('');
+		setQuantity('');
+		setStoreID('');
+		setSupplierID('');
+		setItemName('');
+		setItems([]);
+		setStores([]);
+	  };
 
-		setPrice(result.data.price);
-		setQuantity(result.data.quantity);
-		setStoreID(result.data.storeID);
-		setSupplierID(result.data.supplierID);
-		setItemName(result.data.itemName);
+	const getData = async()=>{
+		result = await axios.get(`http://localhost:5000/api/v1/admin/itemStocks/${id}`);
+
+		setPrice(result.data.data.price);
+		setQuantity(result.data.data.quantity);
+		setStoreID(result.data.data.storeID);
+		setSupplierID(result.data.data.supplierID);
+		setItemName(result.data.data.itemName);
 		
 	}
 
@@ -71,7 +82,8 @@ const RawItemStock = (props) => {
 		if(props.task==='Update'){
 			getData();
 		}
-	},[]);
+		else if(props.task==='Add')resetForm();
+	},[props.task]);
   return (
     <div className='admin-sign-form'>
 			<div className='admin-form-bg'>
@@ -80,7 +92,7 @@ const RawItemStock = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Stock</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/${props.task.toLowerCase()}ItemStock?id=${id}`} method="POST"  className='form-horizontal clearfix'>
+						<form action={`http://localhost:5000/api/v1/admin/itemStocks/${id}`} method="POST"  className='form-horizontal clearfix'>
 							<div className="input-group">
 								<label htmlFor="rID" className="form-label">Item Name:</label>
 						<div className='form-group'>

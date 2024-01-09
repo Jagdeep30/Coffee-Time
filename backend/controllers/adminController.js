@@ -12,6 +12,7 @@ const userModel = require("../models/userModel.js");
 const voucherModel = require("../models/voucherModel.js");
 const voucherRedModel = require("../models/voucherRedModel.js");
 
+
 // exports.addvoucher = async (req, res) => {
 // 	let data = { ...req.body };
 // 	data.amount = parseInt(data.amount);
@@ -74,81 +75,155 @@ const voucherRedModel = require("../models/voucherRedModel.js");
 // MONGO DB
 
 //controllers for adding document in a controller
-exports.addvoucher = async (req, res) => {
+
+
+exports.addvoucher = async (req, res, next) => {
+	try{
 	let data = { ...req.body };
 	data.amount = parseInt(data.amount);
 
 	await voucherModel.create(data);
 	// console.log(response);
 	res.redirect('http://localhost:3000/admin/voucherForm');
+	}
+	catch(err){
+		next(err);
+	}
 };
 
-exports.addEmp = async (req,res)=>{
+exports.addEmp = async (req,res, next)=>{
+	try{
 	let data = { ...req.body };
 	console.log(data);
 	await employeeModel.create(data);
 	res.redirect('http://localhost:3000/admin/employeeForm');
+
+	}
+	catch(err){
+		next(err);
+	}
 }
 
-exports.addjob = async (req,res)=>{
-	let data = {...req.body};
-	await jobModel.create(data);
-	res.redirect('http://localhost:3000/admin/jobForm');
+exports.addjob = async (req,res,next)=>{
+	try{
+		let data = {...req.body};
+		await jobModel.create(data);
+		res.redirect('http://localhost:3000/admin/jobForm');
+
+	}catch(err){
+		next(err);
+	}
 }
-exports.addproduct = async (req,res)=>{
-	let data = {...req.body};
+exports.addproduct = async (req,res,next)=>{
+	try{let data = {...req.body};
 	await productModel.create(data);
-	res.redirect('http://localhost:3000/admin/productForm');
+	res.redirect('http://localhost:3000/admin/productForm');}
+	catch(err){
+		next(err);
+	}
 }
-exports.additem = async (req,res)=>{
-	let data = {...req.body};
+exports.additem = async (req,res,next)=>{
+	try{let data = {...req.body};
 	await itemModel.create(data);
-	res.redirect('http://localhost:3000/admin/itemForm');
+	res.redirect('http://localhost:3000/admin/itemForm');}
+	catch(err){
+		next(err);
+	}
 }
-exports.additemstock = async (req,res)=>{
-	let data = {...req.body};
-	await itemStockModel.create(data);
-	res.redirect('http://localhost:3000/admin/itemStockForm');
+exports.additemstock = async (req,res,next)=>{
+	try{
+		let data = {...req.body};
+		await itemStockModel.create(data);
+		res.redirect('http://localhost:3000/admin/itemStockForm');
+
+	}catch(err){
+		next(err);
+	}
 }
-exports.addstore = async (req,res)=>{
-	let data = {...req.body};
-	await storeModel.create(data);
-	res.redirect('http://localhost:3000/admin/storeForm');
+exports.addstore = async (req,res,next)=>{
+	try{
+
+		let data = {...req.body};
+		await storeModel.create(data);
+		res.redirect('http://localhost:3000/admin/storeForm');
+	}catch(err){
+		next(err);
+	}
 }
-exports.addsupplier = async (req,res)=>{
-	let data = {...req.body};
-	await supplierModel.create(data);
-	res.redirect('http://localhost:3000/admin/supplierForm');
+exports.addsupplier = async (req,res,next)=>{
+	try{
+
+		let data = {...req.body};
+		await supplierModel.create(data);
+		res.redirect('http://localhost:3000/admin/supplierForm');
+	}catch(err){
+		next(err);
+	}
 }
 
 
 
 //controllers for updating the value in a document based on its _id
-exports.updateProduct = async(req,res)=>{
-	await productModel.findByIdAndUpdate(req.query.id,req.body);
-	res.redirect('http://localhost:3000/admin/productForm');
+exports.updateProduct = async(req,res,next)=>{
+	try{
+		await productModel.findByIdAndUpdate(req.query.id,req.body);
+		res.redirect('http://localhost:3000/admin/productForm');
+
+	}catch(err){
+		next(err);
+	}
 }
-exports.updateEmployee = async(req,res)=>{
-	await employeeModel.findByIdAndUpdate(req.query.id,req.body);
-	res.redirect('http://localhost:3000/admin/empForm');
+exports.updateEmployee = async(req,res,next)=>{
+	try{
+		await employeeModel.findByIdAndUpdate(req.query.id,req.body);
+		res.redirect('http://localhost:3000/admin/empForm');
+
+	}catch(err){
+		next(err);
+	}
 }
-exports.updateJob = async(req,res)=>{
-	await jobModel.findByIdAndUpdate(req.query.id,req.body);
-	res.redirect('http://localhost:3000/admin/jobForm');
+exports.updateJob = async(req,res,next)=>{
+	try{
+		await jobModel.findByIdAndUpdate(req.query.id,req.body);
+		res.redirect('http://localhost:3000/admin/jobForm');
+
+	}catch(err){
+		next(err);
+	}
 }
-exports.updateItem = async(req,res)=>{
-	await itemModel.findByIdAndUpdate(req.query.id,req.body);
-	res.redirect('http://localhost:3000/admin/itemForm');
+exports.updateItem = async(req,res,next)=>{
+	try{
+		await itemModel.findByIdAndUpdate(req.query.id,req.body);
+		res.redirect('http://localhost:3000/admin/itemForm');
+
+	}catch(err){
+		next(err);
+	}
 }
-exports.updateItemStock = async(req,res)=>{
-	await itemstockModel.findByIdAndUpdate(req.query.id,req.body);
-	res.redirect('http://localhost:3000/admin/itemstockForm');
+exports.updateItemStock = async(req,res,next)=>{
+	try{
+
+		await itemstockModel.findByIdAndUpdate(req.query.id,req.body);
+		res.redirect('http://localhost:3000/admin/itemstockForm');
+	}catch(err){
+		next(err);
+	}
 }
-exports.updateStore = async(req,res)=>{
-	await storeModel.findByIdAndUpdate(req.query.id,req.body);
-	res.redirect('http://localhost:3000/admin/storeForm');
+exports.updateStore = async(req,res,next)=>{
+	try{
+		await storeModel.findByIdAndUpdate(req.query.id,req.body);
+		res.redirect('http://localhost:3000/admin/storeForm');
+
+	}catch(err){
+		next(err);
+	}
 }
-exports.updateSupplier = async(req,res)=>{
-	await supplierModel.findByIdAndUpdate(req.query.id,req.body);
-	res.redirect('http://localhost:3000/admin/supplierForm');
+exports.updateSupplier = async(req,res,next)=>{
+	try{
+		await supplierModel.findByIdAndUpdate(req.query.id,req.body);
+		res.redirect('http://localhost:3000/admin/supplierForm');
+
+	}catch(err){
+		next(err);
+	}
 }

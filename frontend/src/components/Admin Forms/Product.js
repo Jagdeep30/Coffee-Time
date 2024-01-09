@@ -1,21 +1,29 @@
 import React,{ useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import PropTypes from 'prop-types';
 
 const Product = (props) => {
 	// const [data, setData] = useState({});
 	const [name,setName] = useState('');
 	const [unitPrice,setUnitPrice] = useState('');
 	const [description,setDescription] = useState('');
+
 	const params = useParams();
 	const id = params.id;
 
+	const resetForm = () => {
+		setName('');
+		setUnitPrice('');
+		setDescription('');
+	  };
+
 	const getData = async()=>{
-		let result = await axios.get(`http://localhost:5000/api/v1/getter/getProduct?id=${id}`);
+		let result = await axios.get(`http://localhost:5000/api/v1/admin/products/${id}`);
 		// setData(result.data);
-		setName(result.data.name);
-		setUnitPrice(result.data.unitPrice);
-		setDescription(result.data.description);
+		setName(result.data.data.name);
+		setUnitPrice(result.data.data.unitPrice);
+		setDescription(result.data.data.description);
 	}
 
 	const handleNameChange = (e)=>{
@@ -36,7 +44,9 @@ const Product = (props) => {
 		if(props.task==='Update'){
 			getData();
 		}
-	},[])
+		else if(props.task==='Add')resetForm();
+	},[props.task]);
+	
 	return (
 		<div className='admin-sign-form'>
 			<div className='admin-form-bg'>
@@ -46,7 +56,7 @@ const Product = (props) => {
 							<h3 className='admin-title'>{props.task} Product</h3>
 						</div>
 						<form
-							action={`http://localhost:5000/api/v1/admin/${props.task.toLowerCase()}Product?id=${id}`}
+							action={`http://localhost:5000/api/v1/admin/products/${id}`}
 							className='form-horizontal clearfix'
 							method="POST"
 						>
@@ -136,5 +146,9 @@ const Product = (props) => {
 		</div>
 	);
 };
+
+Product.propTypes = {
+	task:PropTypes.string.isRequired
+}
 
 export default Product;

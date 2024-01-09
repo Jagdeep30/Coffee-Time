@@ -32,22 +32,38 @@ const Employee = (props) => {
 	const id = params.id;
 	let result = {};
 
+	const resetForm = () => {
+		setFirstName('');
+		setLastName('');
+		setPhone('');
+		setEmail('');
+		setAddress1('');
+		setAddress2('');
+		setPincode('');
+		setCountryID('');
+		setStateID('state');
+		setCityID('city');
+		setJobID('');
+		setStoreID('');
+		setDOL('');
+	  };
+
 	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/getter/getEmployee?id=${id}`);
-		console.log(result.data);
-		setFirstName(result.data.firstName);
-		setLastName(result.data.lastName);
-		setPhone(result.data.phone);
-		setEmail(result.data.email);
-		setAddress1(result.data.address1);
-		setAddress2(result.data.address2);
-		setPincode(result.data.pincode);
-		setCountryID(result.data.countryID);
-		setStateID(result.data.stateID);
-		setCityID(result.data.cityID);
-		setJobID(result.data.jobID);
-		setStoreID(result.data.storeID);
-		setDOL(result.data.dateOfLeaving);
+		result = await axios.get(`http://localhost:5000/api/v1/admin/employees/${id}`);
+		// console.log(result.data);
+		setFirstName(result.data.data.firstName);
+		setLastName(result.data.data.lastName);
+		setPhone(result.data.data.phone);
+		setEmail(result.data.data.email);
+		setAddress1(result.data.data.address1);
+		setAddress2(result.data.data.address2);
+		setPincode(result.data.data.pincode);
+		setCountryID(result.data.data.countryID);
+		setStateID(result.data.data.stateID);
+		setCityID(result.data.data.cityID);
+		setJobID(result.data.data.jobID);
+		setStoreID(result.data.data.storeID);
+		setDOL(result.data.data.dateOfLeaving);
 	}
 
 	const handleFNameChange = (e)=>{
@@ -81,18 +97,51 @@ const Employee = (props) => {
 	const handleCityChange = (e)=>{
 		setCityID(e.target.value);
 	}
+	const handleJobChange = (e)=>{
+		setJobID(e.target.value);
+	}
+	const handleStoreChange = (e)=>{
+		setStoreID(e.target.value);
+	}
+	const handleDOLChange = (e)=>{
+		setDOL(e.target.value);
+	}
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+		console.log(e);
+
+		let data = new FormData(e.target);
+		let info = {};
+			for(let entry of data.entries()){
+				info[entry[0]] = entry[1];
+			}
+
+		if(props.task==='Add'){
+			
+			let res = await axios.post(`http://localhost:5000/api/v1/admin/employees`,info);
+			// console.log(res);
+		}
+		else if(props.task==='Update'){
+			// console.log(info);
+			
+			let res = await axios.patch(`http://localhost:5000/api/v1/admin/employees/${id}`,info);
+			// console.log(res);
+		}
+
+		return;
+	}
 	
 	const getCountries = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/getter/getCountries');
+		let c = await axios.get('http://localhost:5000/api/v1/admin/countries');
 		// console.log(c.data);
-		setCountries(c.data);
+		setCountries(c.data.data);
 	}
 	const getStates = async(value)=>{
 		// console.log(value);
 		if(!value)return;
-		let d = await axios.get(`http://localhost:5000/api/v1/getter/getStates?countryID=${value}`);
+		let d = await axios.get(`http://localhost:5000/api/v1/admin/states/${value}`);
 		// console.log(d);
-		setStates(d.data);
+		setStates(d.data.data);
 	}
 	// const getStates = async(value)=>{
 	// 	// console.log(value);
@@ -103,18 +152,18 @@ const Employee = (props) => {
 	const getCities = async(value)=>{
 		// console.log(value);
 		if(value==='state')return;
-		let d = await axios.get(`http://localhost:5000/api/v1/getter/getCities?stateID=${value}`);
+		let d = await axios.get(`http://localhost:5000/api/v1/admin/cities/${value}`);
 		// console.log(d);
-		setCities(d.data);
+		setCities(d.data.data);
 	}
 	const getJobs = async(value)=>{
-		let d = await axios.get(`http://localhost:5000/api/v1/getter/getJobs`);
-		setJobs(d.data);
+		let d = await axios.get(`http://localhost:5000/api/v1/admin/jobs`);
+		setJobs(d.data.data);
 	}
 	const getStores = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/getter/getStores');
+		let c = await axios.get('http://localhost:5000/api/v1/admin/stores');
 		// console.log(c.data);
-		setStores(c.data);
+		setStores(c.data.data);
 	}
 	useEffect(()=>{
 		getStates(countryID);
@@ -127,10 +176,9 @@ const Employee = (props) => {
 		getCountries();
 		getJobs();
 		getStores();
-		if(props.task==='Update'){
-			getData();
-		}
-	},[]);
+		if(props.task==='Update')getData();
+		else if(props.task==='Add')resetForm();
+	},[props.task]);
 
 
 
@@ -143,7 +191,7 @@ const Employee = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Employee</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/${props.task.toLowerCase()}Emp?id=${id}`} method="POST" className='form-horizontal clearfix'>
+						<form onSubmit={handleFormSubmission} className='form-horizontal clearfix' encType="multipart/form-data">
 							<div className="input-group">
 								<label htmlFor="firstname" className="form-label">First Name:</label>
 								<div className='form-group'>
@@ -345,6 +393,7 @@ const Employee = (props) => {
 									id='job'
 									className='form-control'
 									value={jobID}
+									onChange={handleJobChange}
 								>
 									
 									{jobs.map((val)=>{
@@ -361,6 +410,7 @@ const Employee = (props) => {
 									id='store'
 									className='form-control'
 									value={storeID}
+									onChange={handleStoreChange}
 								>
 									
 									 {stores.map((val)=>{
@@ -392,6 +442,7 @@ const Employee = (props) => {
 									className='form-control'
 									placeholder='Date Of Leaving'
 									value={dOL}
+									onChange={handleDOLChange}
 									// defaultValue={props.task==='Update'?result.data.dateOfLeaving:''}
 								/>
 							</div>

@@ -139,3 +139,14 @@
     width: fit-content;
     height: fit-content;
 }
+
+
+.signin{
+    text-decoration: none;
+    color: rgb(208, 208, 208);
+    text-decoration: none;
+    color: rgb(208, 208, 208);
+    outline: 0.09rem solid;
+    outline-offset: 0.6rem;
+    border-radius: 0.5rem;
+}

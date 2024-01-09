@@ -20,17 +20,31 @@ const Supplier = (props) => {
 	const id = params.id;
 	let result = '';
 
-	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/getter/getSupplier?id=${id}`);
+	const resetForm = () => {
+		setStates([]);
+		setCountries([]);
+		setCities([]);
+		setSupplierName('');
+		setPhone('');
+		setEmail('');
+		setAddress('');
+		setPincode('');
+		setCountryID('');
+		setStateID('state');
+		setCityID('city');
+	  };
 
-		setSupplierName(result.data.supplierName);
-		setPhone(result.data.phone);
-		setEmail(result.data.email);
-		setAddress(result.data.address);
-		setPincode(result.data.pincode);
-		setCountryID(result.data.countryID);
-		setStateID(result.data.stateID);
-		setCityID(result.data.cityID);
+	const getData = async()=>{
+		result = await axios.get(`http://localhost:5000/api/v1/admin/suppliers/${id}`);
+
+		setSupplierName(result.data.data.supplierName);
+		setPhone(result.data.data.phone);
+		setEmail(result.data.data.email);
+		setAddress(result.data.data.address);
+		setPincode(result.data.data.pincode);
+		setCountryID(result.data.data.countryID);
+		setStateID(result.data.data.stateID);
+		setCityID(result.data.data.cityID);
 	}
 
 	const handleSupplierNameChange = (e)=>{
@@ -60,23 +74,23 @@ const Supplier = (props) => {
 	}
 	
 	const getCountries = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/getter/getCountries');
+		let c = await axios.get('http://localhost:5000/api/v1/admin/countries');
 		// console.log(c.data);
-		setCountries(c.data);
+		setCountries(c.data.data);
 	}
 	const getStates = async(value)=>{
 		// console.log(value);
 		if(!value)return;
-		let d = await axios.get(`http://localhost:5000/api/v1/getter/getStates?countryID=${value}`);
+		let d = await axios.get(`http://localhost:5000/api/v1/admin/states/${value}`);
 		// console.log(d);
-		setStates(d.data);
+		setStates(d.data.data);
 	}
 	const getCities = async(value)=>{
 		// console.log(value);
 		if(value==='state')return;
-		let d = await axios.get(`http://localhost:5000/api/v1/getter/getCities?stateID=${value}`);
+		let d = await axios.get(`http://localhost:5000/api/v1/admin/cities/${value}`);
 		// console.log(d);
-		setCities(d.data);
+		setCities(d.data.data);
 	}
 
 	useEffect(()=>{
@@ -92,7 +106,8 @@ const Supplier = (props) => {
 		if(props.task==='Update'){
 			getData();
 		}
-	},[]);
+		else if(props.task==='Add')resetForm();
+	},[props.task]);
   return (
     <div className='admin-sign-form'>
 			<div className='admin-form-bg'>
@@ -101,7 +116,7 @@ const Supplier = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Supplier</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/${props.task.toLowerCase()}Supplier?id=${id}`} method="POST" className='form-horizontal clearfix'>
+						<form action={`http://localhost:5000/api/v1/admin/suppliers/${id}`} method="POST" className='form-horizontal clearfix'>
 							<div className="input-group">
 								<label htmlFor="supplier" className="form-label">Supplier Name:</label>
 							<div className='form-group'>

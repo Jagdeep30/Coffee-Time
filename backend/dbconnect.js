@@ -38,6 +38,7 @@ const dbcon = async()=>{
         dbName:'coffee_shop'
     });
     console.log('Database connected successfully');
+
 }
 
 module.exports = dbcon;

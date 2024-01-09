@@ -24,35 +24,37 @@ const Admin = () => {
 				<AdminNav />
 				<div className='section'>
 					<Routes>
-						<Route exact path='employeeForm' element={<Employee task='Add'/>} />
-						<Route exact path='jobForm' element={<Job task='Add'/>} />
-						<Route exact path='supplierForm' element={<Supplier task='Add'/>} />
-						<Route exact path='itemForm' element={<RawItem task='Add'/>} />
-						<Route exact path='itemstockForm' element={<RawItemStock task='Add'/>}/>
-						<Route exact path='voucherForm' element={<Voucher />} />
-						<Route exact path='storeForm' element={<Store task='Add'/>} />
-						<Route exact path='productForm' element={<Product task='Add'/>} />
+						<Route path="/forms">
+						<Route exact path='employee' element={<Employee task='Add'/>} />
+						<Route exact path='job' element={<Job task='Add'/>} />
+						<Route exact path='supplier' element={<Supplier task='Add'/>} />
+						<Route exact path='item' element={<RawItem task='Add'/>} />
+						<Route exact path='itemstock' element={<RawItemStock task='Add'/>}/>
+						<Route exact path='voucher' element={<Voucher />} />
+						<Route exact path='store' element={<Store task='Add'/>} />
+						<Route exact path='product' element={<Product task='Add'/>} />
+						<Route exact path='employee/:id' element={<Employee task='Update'/>} />
+						<Route exact path='job/:id' element={<Job task='Update'/>} />
+						<Route exact path='supplier/:id' element={<Supplier task='Update'/>} />
+						<Route exact path='item/:id' element={<RawItem task='Update'/>} />
+						<Route exact path='itemstock/:id' element={<RawItemStock task='Update'/>}/>
+						<Route exact path='voucher/:id' element={<Voucher />} />
+						<Route exact path='store/:id' element={<Store task='Update'/>} />
+						<Route exact path='product/:id' element={<Product task='Update'/>} />
+						<Route exact path='product/:id' element={<Product task='Update'/>} />
+						</Route>
 
+						<Route path="/all">
+						<Route exact path='products' element={<Table collection='product'/>} />
+						<Route exact path='employees' element={<Table collection='employee'/>} />
+						<Route exact path='jobs' element={<Table collection='job'/>} />
+						<Route exact path='items' element={<Table collection='item'/>} />
+						<Route exact path='itemstocks' element={<Table collection='itemStock'/>} />
+						<Route exact path='stores' element={<Table collection='store'/>} />
+						<Route exact path='suppliers' element={<Table collection='supplier'/>} />
+						<Route exact path='vouchers' element={<Table collection='voucher'/>} />
+						</Route>
 
-						<Route exact path='allproduct' element={<Table collection='Product'/>} />
-						<Route exact path='allemployee' element={<Table collection='Employee'/>} />
-						<Route exact path='alljob' element={<Table collection='Job'/>} />
-						<Route exact path='allitem' element={<Table collection='Item'/>} />
-						<Route exact path='allitemstock' element={<Table collection='ItemStock'/>} />
-						<Route exact path='allstore' element={<Table collection='Store'/>} />
-						<Route exact path='allsupplier' element={<Table collection='Supplier'/>} />
-						<Route exact path='allvoucher' element={<Table collection='Voucher'/>} />
-
-
-						<Route exact path='employeeForm/:id' element={<Employee task='Update'/>} />
-						<Route exact path='jobForm/:id' element={<Job task='Update'/>} />
-						<Route exact path='supplierForm/:id' element={<Supplier task='Update'/>} />
-						<Route exact path='itemForm/:id' element={<RawItem task='Update'/>} />
-						<Route exact path='itemstockForm/:id' element={<RawItemStock task='Update'/>}/>
-						<Route exact path='voucherForm/:id' element={<Voucher />} />
-						<Route exact path='storeForm/:id' element={<Store task='Update'/>} />
-						<Route exact path='productForm/:id' element={<Product task='Update'/>} />
-						<Route exact path='productForm/:id' element={<Product task='Update'/>} />
 					</Routes>
 				</div>
 			</div>

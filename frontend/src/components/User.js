@@ -33,7 +33,7 @@ const User = () => {
 						<Route path='hotC' element={<HotC />} />
 						<Route path='timings' element={<Timing />} />
 						<Route path='signin' element={<SignInForm />} />
-						<Route path='signup' element={<SignUpForm />} />
+						<Route path='signup' element={<SignUpForm task='Add'/>} />
 					</Routes>
 				</section>
 
@@ -45,13 +45,13 @@ const User = () => {
 
 				<Footer />
 
-				<div id='mybutton'>
+				{/* <div id='mybutton'>
+						<HashLink smooth to='/signin'>
 					<button className='feedback'>
-						<HashLink smooth to='/dashboard/signin#signin'>
 							Sign In
-						</HashLink>
 					</button>
-				</div>
+						</HashLink>
+				</div> */}
 			</div>
 			<Modal />
 		</>

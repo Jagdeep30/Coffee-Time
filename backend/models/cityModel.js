@@ -9,6 +9,10 @@ const citySchema = new mongoose.Schema({
     stateID:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'State'
+    },
+    countryID:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Country'
     }
 });
 

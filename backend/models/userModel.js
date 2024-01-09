@@ -52,16 +52,6 @@ const userSchema = new mongoose.Schema({
         trim:true,
         minLength:8,
         select:false
-    },
-    passwordConfirm:{
-        type:String,
-        trim:true,
-        validate:{
-            validator:function(pass){
-                return pass===this.password;
-            },
-            message:'Password did not match'
-        }
     }
 });
 

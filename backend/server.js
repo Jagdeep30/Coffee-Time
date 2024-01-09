@@ -9,9 +9,7 @@ dotenv.config({ path: "./.env" });
 dbcon();
 
 // /////////////////////////////////////////////////
-// const temp = require('./sample.js');
 
-// temp();
 // ///////////////////////////////////////////////
 
 app.listen(process.env.PORT, () =>

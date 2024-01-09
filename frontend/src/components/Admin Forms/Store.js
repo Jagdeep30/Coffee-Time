@@ -17,13 +17,23 @@ const Store = (props) => {
 	const id = params.id;
 	let result = '';
 
-	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/getter/getStore?id=${id}`);
+	const resetForm = () => {
+		setCities([]);
+		setCountries([]);
+		setStates([]);
+		setCountryID('');
+		setStateID('state');
+		setCityID('city');
+		setStoreName('');
+	  };
 
-		setStoreName(result.data.storeName);
-		setCountryID(result.data.countryID);
-		setStateID(result.data.stateID);
-		setCityID(result.data.cityID);
+	const getData = async()=>{
+		result = await axios.get(`http://localhost:5000/api/v1/admin/stores/${id}`);
+
+		setStoreName(result.data.data.storeName);
+		setCountryID(result.data.data.countryID);
+		setStateID(result.data.data.stateID);
+		setCityID(result.data.data.cityID);
 	}
 
 	const handleStoreNameChange = (e)=>{
@@ -41,23 +51,23 @@ const Store = (props) => {
 
 
 	const getCountries = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/getter/getCountries');
+		let c = await axios.get('http://localhost:5000/api/v1/admin/countries');
 		// console.log(c.data);
-		setCountries(c.data);
+		setCountries(c.data.data);
 	}
 	const getStates = async(value)=>{
 		// console.log(value);
 		if(!value)return;
-		let d = await axios.get(`http://localhost:5000/api/v1/getter/getStates?countryID=${value}`);
+		let d = await axios.get(`http://localhost:5000/api/v1/admin/states/${value}`);
 		// console.log(d);
-		setStates(d.data);
+		setStates(d.data.data);
 	}
 	const getCities = async(value)=>{
 		// console.log(value);
 		if(value==='state')return;
-		let d = await axios.get(`http://localhost:5000/api/v1/getter/getCities?stateID=${value}`);
+		let d = await axios.get(`http://localhost:5000/api/v1/admin/cities/${value}`);
 		// console.log(d);
-		setCities(d.data);
+		setCities(d.data.data);
 	}
 
 	useEffect(()=>{
@@ -73,7 +83,8 @@ const Store = (props) => {
 		if(props.task==='Update'){
 			getData();
 		}
-	},[]);
+		else if(props.task==='Add')resetForm();
+	},[props.task]);
   return (
     <div className='admin-sign-form'>
 			<div className='admin-form-bg'>
@@ -82,7 +93,7 @@ const Store = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Store</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/${props.task.toLowerCase()}Store?id=${id}`} method="POST"  className='form-horizontal clearfix'>
+						<form action={`http://localhost:5000/api/v1/admin/stores/${id}`} method="POST"  className='form-horizontal clearfix'>
 						<div className="input-group">
 								<label htmlFor="firstname" className="form-label">Store Name:</label>
 								<div className='form-group'>

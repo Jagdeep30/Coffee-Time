@@ -9,10 +9,14 @@ const RawItem = (props) => {
 	const id = params.id;
 	let result = '';
 
-	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/getter/getItem?id=${id}`);
+	const resetForm = () => {
+		setItemName('');
+	  };
 
-		setItemName(result.data.itemName);
+	const getData = async()=>{
+		result = await axios.get(`http://localhost:5000/api/v1/admin/items/${id}`);
+
+		setItemName(result.data.data.rName);
 	}
 
 	const handleItemNameChange = (e)=>{
@@ -24,7 +28,8 @@ const RawItem = (props) => {
 		if(props.task==='Update'){
 			getData();
 		}
-	},[]);
+		else if(props.task==='Add')resetForm();
+	},[props.task]);
 
   return (
     <div className='admin-sign-form'>
@@ -34,7 +39,7 @@ const RawItem = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Item</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/${props.task.toLowerCase()}Item?id=${id}`} method="POST"  className='form-horizontal clearfix'>
+						<form action={`http://localhost:5000/api/v1/admin/items/${id}`} method="POST"  className='form-horizontal clearfix'>
 						<div className="input-group">
 								<label htmlFor="item" className="form-label">Item Name:</label>
 							<div className='form-group'>
@@ -45,7 +50,7 @@ const RawItem = (props) => {
 									className='form-control'
 									placeholder='Item Name'
 									value={itemName}
-										onChange={handleItemNameChange}
+									onChange={handleItemNameChange}
 									required
 								/>
 							</div>

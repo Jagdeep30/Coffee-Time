@@ -105,3 +105,16 @@
         margin-bottom: 5rem;
     }
 }
+
+#eye>i{
+    font-family: 'Font Awesome 5 Free';
+    color: var(--text-color);
+    display: inline-block;
+    font-size: 1.2rem;
+    margin: 0.25rem 0.5rem 0 0;
+}
+
+.formLogo{
+    display: block;
+    margin: 0.5rem auto;
+}

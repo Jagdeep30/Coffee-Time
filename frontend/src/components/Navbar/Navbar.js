@@ -3,6 +3,7 @@ import Logo from "./../../assets/updatedLogo.png";
 // import {Link} from 'react-router-dom';
 import { HashLink } from "react-router-hash-link";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
 	return (
@@ -24,6 +25,8 @@ const Navbar = (props) => {
 				<div className="myprofile">
 					<img src={props.profileImg} alt="Me" className='profileImg'/>
 				</div>
+
+				<Link to='/signin' className="signin montserrat item">Login/SignUp</Link>
 
 
 				<img src={Logo} alt='Company Logo' className='logo' />

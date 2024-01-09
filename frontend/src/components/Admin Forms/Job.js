@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Job = (props) => {
 	const [jobName, setJobName] = useState('');
@@ -11,11 +11,16 @@ const Job = (props) => {
 	const id = params.id;
 	let result = '';
 
-	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/getter/getJob?id=${id}`);
+	const resetForm = () => {
+		setJobName('');
+		setSalary('');
+	  };
 
-		setJobName(result.data.jobName);
-		setSalary(result.data.salary);
+	const getData = async()=>{
+		result = await axios.get(`http://localhost:5000/api/v1/admin/jobs/${id}`);
+
+		setJobName(result.data.data.jobName);
+		setSalary(result.data.data.salary);
 		
 	}
 
@@ -32,7 +37,8 @@ const Job = (props) => {
 		if(props.task==='Update'){
 			getData();
 		}
-	},[]);
+		else if(props.task === 'Add')resetForm();
+	},[props.task]);
   return (
     <div className='admin-sign-form'>
 			<div className='admin-form-bg'>
@@ -41,7 +47,7 @@ const Job = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Job</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/${props.task.toLowerCase()}Job?id=${id}`} method='POST' className='form-horizontal clearfix'>
+						<form action={`http://localhost:5000/api/v1/admin/jobs/${id}`} method='POST' className='form-horizontal clearfix'>
 						<div className="input-group">
 								<label htmlFor="jobname" className="form-label">Job Name:</label>
 							<div className='form-group'>
@@ -81,6 +87,11 @@ const Job = (props) => {
 			</div>
 		</div>
   )
+}
+
+
+Job.propTypes = {
+	task:PropTypes.string.isRequired
 }
 
 export default Job;
