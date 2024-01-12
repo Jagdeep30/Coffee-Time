@@ -15,7 +15,7 @@ const Button = () => {
 				data-bs-toggle={signIn?'modal':''}
 				data-bs-target={signIn?'#exampleModal':''}
 				onClick={()=>{
-					dispatch(setOrder())
+					// dispatch(setOrder())
 					
 				}}
 			>
@@ -170,11 +170,11 @@ const Button = () => {
 								data-bs-dismiss='modal'
 								onClick={() => {
 									alert("Order Placed ✅");
-									dispatch(updateName(formRef.current[0].value))
-									dispatch(updatePhone(formRef.current[1].value))
-									dispatch(updateMail(formRef.current[2].value))
-									dispatch(updateAddress(formRef.current[3].value))
-									formRef.current.reset()
+									// dispatch(updateName(formRef.current[0].value))
+									// dispatch(updatePhone(formRef.current[1].value))
+									// dispatch(updateMail(formRef.current[2].value))
+									// dispatch(updateAddress(formRef.current[3].value))
+									// formRef.current.reset()
 								}}
 
 								data-bs-toggle='modal'

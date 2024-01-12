@@ -175,8 +175,10 @@ exports.updateProduct = async(req,res,next)=>{
 }
 exports.updateEmployee = async(req,res,next)=>{
 	try{
-		await employeeModel.findByIdAndUpdate(req.query.id,req.body);
-		res.redirect('http://localhost:3000/admin/empForm');
+		await employeeModel.findByIdAndUpdate(req.params.id,req.body);
+		res.status(200).json({
+			status:'success'
+		})
 
 	}catch(err){
 		next(err);

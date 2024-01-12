@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import './adminForm.css';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
@@ -27,6 +27,8 @@ const Employee = (props) => {
 	const [jobID, setJobID] = useState('');
 	const [storeID, setStoreID] = useState('');
 	const [dOL, setDOL] = useState('');
+
+	const navigate = useNavigate();
 
 	const params = useParams();
 	const id = params.id;
@@ -106,6 +108,13 @@ const Employee = (props) => {
 	const handleDOLChange = (e)=>{
 		setDOL(e.target.value);
 	}
+
+
+
+	const axiosBackend = axios.create({
+		baseURL: 'http://localhost:5000/api/v1/admin',
+	  });
+	  
 	const handleFormSubmission = async(e)=>{
 		e.preventDefault();
 		console.log(e);
@@ -124,9 +133,16 @@ const Employee = (props) => {
 		else if(props.task==='Update'){
 			// console.log(info);
 			
-			let res = await axios.patch(`http://localhost:5000/api/v1/admin/employees/${id}`,info);
+			// let res = await axios.patch(`/api/v1/admin/employees/${id}`,info);
+			// let res = axiosBackend.put(`/employees/${id}`,info);
+			let res = await axios({
+				method: 'put',
+				url: `http://localhost:5000/api/v1/admin/employees/${id}`,
+				data: info
+			});
 			// console.log(res);
 		}
+		navigate('/admin/all/employees');
 
 		return;
 	}

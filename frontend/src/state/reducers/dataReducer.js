@@ -1,57 +1,41 @@
 const initialState = {
-    signIn : false,
-    order : false,
-    name : '',
-    phone : '',
-    address :'',
-    password :'',
-    voucher:'',
-    email:''
+    cart:new Map(),
+    cartSize : 0,
+    user:{},
+    login:false
 }
 
 const dataReducer = (state=initialState,action)=>{
-    if(action.type === 'signIn'){
-        state.signIn = action.payload;
+    if(action.type === 'addToCart'){
+        if(state.cart.has(action.payload)){
+            state.cart.set(action.payload,state.cart.get(action.payload)+1);
+        }else{
+            state.cart.set(action.payload,1);
+        }
+        state.cartSize++;
         return {...state};
     }
-    else if(action.type === 'signOut'){
-        state.signIn = action.payload;
+    else if(action.type === 'deleteFromCart'){
+        if(state.cart.has(action.payload)){
+        if(state.cart.get(action.payload)===1)state.cart.delete(action.payload);
+        else state.cart.set(action.payload,state.cart.get(action.payload)-1);
+        if(state.cartSize!==0)state.cartSize--;}
         return {...state};
     }
-    else if(action.type === 'setOrder'){
-        state.order = action.payload;
+    else if(action.type==='login'){
+        state.login = action.payload;
         return {...state};
     }
-    else if(action.type === 'unSetOrder'){
-        state.order = action.payload;
+    else if(action.type==='logout'){
+        state.login = action.payload;
         return {...state};
     }
-    else if(action.type === 'updateName'){
-        state.name = action.payload;
+    else if(action.type==='addUser'){
+        state.user = action.payload;
         return {...state};
     }
-    else if(action.type === 'updatePhone'){
-        state.phone = action.payload;
-        return {...state};
-    }
-    else if(action.type === 'updateAddress'){
-        state.address = action.payload;
-        return {...state};
-    }
-    else if(action.type === 'updatePassword'){
-        state.password = action.payload;
-        return {...state};
-    }
-    else if(action.type === 'updateVoucher'){
-        state.voucher = action.payload;
-        return {...state};
-    }
-    else if(action.type === 'updateEmail'){
-        state.email = action.payload;
-        return {...state};
-    }
-    else if(action.type === 'updateQuery'){
-        state.query = action.payload;
+    else if(action.type==='deleteUser'){
+        state.user = {};
         return {...state};
     }
     else{

@@ -150,3 +150,20 @@
     outline-offset: 0.6rem;
     border-radius: 0.5rem;
 }
+
+.cart{
+    margin-top: 8px;
+    height: 35px;
+    width: 50px;
+}
+
+.cart:hover{
+    cursor: pointer;
+}
+
+
+.align-element{
+    top: 0.6rem !important;
+    left: 2.6rem !important;
+    position: absolute;
+}

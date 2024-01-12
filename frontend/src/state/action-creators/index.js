@@ -1,89 +1,48 @@
-export const signIn = ()=>{
+export const addToCart = (id)=>{
     return (dispatch)=>{
         dispatch({
-            type:'signIn',
+            type:'addToCart',
+            payload:id
+        })
+    }
+}
+export const deleteFromCart = (id)=>{
+    return (dispatch)=>{
+        dispatch({
+            type:'deleteFromCart',
+            payload:id
+        })
+    }
+}
+export const loggedIn = ()=>{
+    return (dispatch)=>{
+        dispatch({
+            type:'login',
             payload:true
         })
     }
 }
-export const sigOut = ()=>{
+export const loggedOut = ()=>{
     return (dispatch)=>{
         dispatch({
-            type:'signOut',
+            type:'logout',
             payload:false
         })
     }
 }
-export const setOrder = ()=>{
+export const addUserData = (data)=>{
     return (dispatch)=>{
         dispatch({
-            type:'setOrder',
-            payload:true
+            type:"addUser",
+            payload:data
         })
     }
 }
-export const unSetOrder = ()=>{
+export const deleteUserData = ()=>{
     return (dispatch)=>{
         dispatch({
-            type:'unSetOrder',
-            payload:false
-        })
-    }
-}
-
-export const updateName = (name)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'updateName',
-            payload:name
-        })
-    }
-}
-export const updatePhone = (phone)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'updatePhone',
-            payload:phone
-        })
-    }
-}
-export const updateAddress= (address)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'updateAddress',
-            payload:address
-        })
-    }
-}
-export const updatePassword = (password)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'updatePassword',
-            payload:password
-        })
-    }
-}
-export const updateVoucher = (voucher)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'updateVoucher',
-            payload:voucher
-        })
-    }
-}
-export const updateMail = (email)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'updateEmail',
-            payload:email
-        })
-    }
-}
-export const updateQuery = (query)=>{
-    return (dispatch)=>{
-        dispatch({
-            type:'updateQuery',
-            payload:query
+            type:'deleteUser',
+            payload:''
         })
     }
 }

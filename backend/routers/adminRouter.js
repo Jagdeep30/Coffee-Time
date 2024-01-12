@@ -29,17 +29,17 @@ router.route("/states/:id").get(getAllStates); // to get all states according to
 router.route("/cities/:id").get(getAllCities); // to get all cities according to stateID
 
 router.route("/countries").get(getAllCountries);
-router.route('/products').get(getAllProducts).post(addproduct);
+router.route('/products').get(getAllProducts).post(upload.single(),addproduct);
 router.route('/employees').get(getAllEmployees).post(upload.none(),addEmp);
-router.route('/items').get(getAllItems).post(additem);
-router.route('/itemStocks').get(getAllItemStocks).post(additemstock);
-router.route('/jobs').get(getAllJobs).post(addjob);
+router.route('/items').get(getAllItems).post(upload.none(),additem);
+router.route('/itemStocks').get(getAllItemStocks).post(upload.none(),additemstock);
+router.route('/jobs').get(getAllJobs).post(upload.none(),addjob);
 router.route('/orderDetails').get(getAllOrderDetails);
 router.route('/orders').get(getAllOrders);
-router.route('/stores').get(getAllStores).post(addstore);
-router.route('/suppliers').get(getAllSuppliers).post(addsupplier);
+router.route('/stores').get(getAllStores).post(upload.single(),addstore);
+router.route('/suppliers').get(getAllSuppliers).post(upload.none(),addsupplier);
 router.route('/users').get(getAllUsers);
-router.route('/vouchers').get(getAllVouchers).post(addvoucher);
+router.route('/vouchers').get(getAllVouchers).post(upload.none(),addvoucher);
 router.route('/voucherReds').get(getAllVoucherReds);
 
 
@@ -48,15 +48,15 @@ router.route('/voucherReds').get(getAllVoucherReds);
 // router.route("/cities/:id").get(getCity);
 
 
-router.route('/products/:id').get(getProduct).patch(updateProduct);
-router.route('/employees/:id').get(getEmployee).patch(upload.none(),updateEmployee);
-router.route('/items/:id').get(getItem).patch(updateItem);
-router.route('/itemStocks/:id').get(getItemStock).patch(updateItemStock);
-router.route('/jobs/:id').get(getJob).patch(updateJob);
+router.route('/products/:id').get(getProduct).put(upload.single(),updateProduct);
+router.route('/employees/:id').get(getEmployee).put(upload.none(),updateEmployee);
+router.route('/items/:id').get(getItem).put(upload.none(),updateItem);
+router.route('/itemStocks/:id').get(getItemStock).put(upload.none(),updateItemStock);
+router.route('/jobs/:id').get(getJob).put(upload.none(),updateJob);
 router.route('/orderDetails/:id').get(getOrderDetail);
 router.route('/orders/:id').get(getOrder);
-router.route('/stores/:id').get(getStore).patch(updateStore);
-router.route('/suppliers/:id').get(getSupplier).patch(updateSupplier);
+router.route('/stores/:id').get(getStore).put(upload.single(),updateStore);
+router.route('/suppliers/:id').get(getSupplier).put(upload.none(),updateSupplier);
 router.route('/users/:id').get(getUser);
 router.route('/vouchers/:id').get(getVoucher);
 router.route('/voucherReds/:id').get(getVoucherRed);

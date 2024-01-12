@@ -33,13 +33,14 @@
     box-shadow: rgba(0, 0, 0, 0.764) 0px 5px 15px;
 }
 .branch-name{
-    font-size: 2rem;
-    font-weight:900;
-    line-height: 3rem;
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.4rem;
     background-color: var(--primary-color);
     border-radius: 1rem;
     width: 12rem;
     margin-bottom: 1rem;
+    padding: 1rem 0rem;
     position: relative;
 }
 .branch-name::before{

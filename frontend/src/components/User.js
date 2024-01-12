@@ -15,6 +15,8 @@ import SignInForm from "./SignIn Form/SignInForm";
 import SignUpForm from "./SignUp Form/SignUpForm";
 import Form from "./Form/Form";
 import { useState } from "react";
+import Products from "./Products/Products";
+import Orders from "./Orders/Orders";
 
 const User = () => {
 	const [isForm, setIsForm] = useState(false);
@@ -22,7 +24,7 @@ const User = () => {
 		<>
 			<div className='container-fluid'>
 				<Navbar profileImg='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTirwPXcQ5lYts8qcm8Qtqyw2KXfEwlME2XPQ&usqp=CAU' menu={true}/>
-				<Intro />
+				{/* <Intro /> */}
 
 				<section style={{ height: "fit-content", width: "100%" }}>
 					<Routes>
@@ -34,14 +36,18 @@ const User = () => {
 						<Route path='timings' element={<Timing />} />
 						<Route path='signin' element={<SignInForm />} />
 						<Route path='signup' element={<SignUpForm task='Add'/>} />
+						<Route path="products" element={<Products/>}/>
+						<Route path="voucher" element={isForm?<Form formm={setIsForm}/> : <Voucher formm={setIsForm}/>}/>
+						<Route path="orders" element={<Orders/>}/>
+						<Route path="/" element={<Intro/>} />
 					</Routes>
 				</section>
 
-				{isForm ? (
+				{/* {isForm ? (
 					<Form formm={setIsForm} />
 				) : (
 					<Voucher formm={setIsForm} />
-				)}
+				)} */}
 
 				<Footer />
 

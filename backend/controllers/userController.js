@@ -50,13 +50,14 @@ exports.addUser = async(req,res,next)=>{
 exports.login = async(req,res,next)=>{
     try{
         let {email,password} = req.body;
+        console.log(req.body);
 
-        let user = await userModel.findOne({email}).select(+password);
+        let user = await userModel.findOne({email}).select("+password");
         if(!user)next(new Error('Invalid Credentials'));
 
         // console.log(user);
-        let passMatch = bcrypt.compare(password,user.password);
-        if(!passMatch)next(new Error("Invalid Credentials"));
+        let passMatch = await bcrypt.compare(password,user.password);
+        if(!passMatch) next(new Error("Invalid Credentials"));
 
         createToken(user,res,"Login Successful",200);
     }catch(err){

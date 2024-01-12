@@ -135,11 +135,11 @@ const SupportForm = ()=>{
 								data-bs-dismiss='modal'
                                 onClick={()=>{
                                     alert(`Query Sent! The support team will contact you soon!`)
-									dispatch(updateName(formRef.current[0].value))
-									dispatch(updatePhone(formRef.current[1].value))
-									dispatch(updateMail(formRef.current[2].value))
-									dispatch(updateQuery(formRef.current[3].value))
-									formRef.current.reset()
+									// dispatch(updateName(formRef.current[0].value))
+									// dispatch(updatePhone(formRef.current[1].value))
+									// dispatch(updateMail(formRef.current[2].value))
+									// dispatch(updateQuery(formRef.current[3].value))
+									// formRef.current.reset()
                                 }}
 
 								data-bs-toggle='modal'

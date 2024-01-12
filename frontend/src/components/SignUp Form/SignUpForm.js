@@ -12,11 +12,15 @@ import { useEffect, useRef, useState } from "react";
 // 	updatePhone,
 // } from "./../../state/action-creators/index";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import updatedLogo from './../../assets/updatedLogo.png';
+import { addUserData, loggedIn } from "../../state/action-creators";
 
 const SignUpForm = (props) => {
+
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const [states, setStates] = useState([]);
 	const [countries, setCountries] = useState([]);
@@ -101,6 +105,19 @@ const SignUpForm = (props) => {
 		setShowPasswordC(!showPasswordC);
 	}
 
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+
+		let data = new FormData(e.target);
+		let res = await axios.post('http://localhost:5000/api/v1/user',data);
+		if(res.data.status==='success'){
+			dispatch(addUserData(res.data.data));
+			dispatch(loggedIn(true));
+		}
+
+		navigate('/');
+	}
+
 	const getCountries = async () => {
 		let c = await axios.get(
 			"http://localhost:5000/api/v1/admin/countries"
@@ -148,9 +165,7 @@ const SignUpForm = (props) => {
 		}
 	},[]);
 
-	const order = useSelector((state) => state.order);
-	const formRef = useRef();
-	const dispatch = useDispatch();
+	
 	return (
 		<div className='sign-form'>
 			<div className='form-bg'>
@@ -162,8 +177,8 @@ const SignUpForm = (props) => {
 								<h3 className='title'>Sign up</h3>
 								<form
 									className='form-horizontal clearfix'
-									action="http://localhost:5000/api/v1/user"
-									method="post"
+									onSubmit={handleFormSubmission}
+									encType="multipart/form-data"
 								>
 									<div className='input-group'>
 										<label
@@ -411,6 +426,7 @@ const SignUpForm = (props) => {
 												className='form-control'
 												placeholder='Password'
 												value={password}
+												minLength='8'
 												onChange={handlePasswordChange}
 												required
 											/>
@@ -432,6 +448,7 @@ const SignUpForm = (props) => {
 												className='form-control'
 												placeholder='Confirm Password'
 												value={passwordC}
+												minLength='8'
 												onChange={handlePasswordCChange}
 												required
 											/>

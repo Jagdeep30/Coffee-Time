@@ -1,23 +1,38 @@
 import "./signinform.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
+import axios from 'axios';
 import { useDispatch,useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from "react";
-
-import {signIn,sigOut, unSetOrder, updateName, updatePassword} from './../../state/action-creators/index';
 import updatedLogo from './../../assets/updatedLogo.png';
+import { addUserData, loggedIn } from "../../state/action-creators";
 
 const SignInForm = () => {
 
 
 	const [showPassowrd, setShowPassowrd] = useState(false);
 	const formRef = useRef();
-	const order = useSelector(state => state.order);
-	const signin = useSelector(state => state.signIn);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	
 
 	const handleShowPassword = ()=>{
 		setShowPassowrd(!showPassowrd);
+	}
+
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+
+		let data = new FormData(e.target);
+
+		let user = await axios.post('http://localhost:5000/api/v1/user/login',data);
+
+		if(user.data.status==='success'){
+			console.log('success');
+			dispatch(addUserData(user.data.data));
+			dispatch(loggedIn(true));
+			user.data.data.role==='admin'?navigate('/admin'):navigate('/');
+		}
 	}
 
 	useEffect(()=>{
@@ -26,6 +41,9 @@ const SignInForm = () => {
 			document.body.classList.remove("background-image");
 		}
 	},[]);
+
+
+	/// use  (useNavigate to redirect the user to homepage after login and create a function to handle the data )
 	return (
 		<div id="signin" className='sign-form'>
 			<div className='form-bg'>
@@ -38,7 +56,7 @@ const SignInForm = () => {
 								<span className='create-account'>
 									<Link to='/signup'>create account</Link>
 								</span>
-								<form className='form-horizontal clearfix' action="http://localhost:5000/api/v1/user/login" method="post">
+								<form className='form-horizontal clearfix' onSubmit={handleFormSubmission} encType="multipart/form-data">
 									<div className='form-group'>
 										<input
 											type='text'
@@ -53,24 +71,13 @@ const SignInForm = () => {
 											className='form-control'
 											placeholder='Password'
 											name="password"
+											minLength='8'
 										/>
 										<span id="eye" className="form-icon" onClick={handleShowPassword}><i className={`fa-regular fa-eye${showPassowrd?'-slash':''}`}></i></span>
 									</div>
 									<button
 										type='submit'
 										className='btn btn-default'
-										// onClick={()=>{alert(`Account Created \nHappy Coffee Time 🍵 ${order?'\nOrder Successful✅':''}`)
-										// dispatch(updateName(formRef.current[0].value))
-										// dispatch(signIn())
-										// dispatch(updatePassword(formRef.current[1].value))
-										// dispatch(unSetOrder())
-										// formRef.current.reset()
-										// // window.scrollY('-500px')
-										// console.log(signin)
-										// console.log(formRef.current[0].value)
-									// }}
-										// data-bs-toggle='modal'
-										// data-bs-target='#exampleModal0'
 									>
 										 Login
 									</button>

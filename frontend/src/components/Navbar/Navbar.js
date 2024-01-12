@@ -4,8 +4,17 @@ import Logo from "./../../assets/updatedLogo.png";
 import { HashLink } from "react-router-hash-link";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Navbar = (props) => {
+	const cartSize = useSelector(state => state.cartSize);
+	const login = useSelector(state => state.login);
+
+	useEffect(()=>{
+		console.log('working'+login);
+	},[login])
 	return (
 		<nav className='navbar navbar-expand-lg navbar-dark'>
 			<div className='container-fluid d-flex flex-row-reverse justify-content-between ps-3 pe-4 mt-2'>
@@ -21,15 +30,25 @@ const Navbar = (props) => {
 					<span className='navbar-toggler-icon'></span>
 				</button>
 				
-
+				
 				<div className="myprofile">
 					<img src={props.profileImg} alt="Me" className='profileImg'/>
 				</div>
 
-				<Link to='/signin' className="signin montserrat item">Login/SignUp</Link>
+
+				{!login && <Link to='/signin' className="signin montserrat item">Login/SignUp</Link>}
 
 
-				<img src={Logo} alt='Company Logo' className='logo' />
+				{!props.menu?<img src={Logo} alt='Company Logo' className='logo' /> :
+				<Link to='/dashboard/orders'>
+				<div className="position-relative">
+				<svg xmlns="http://www.w3.org/2000/svg" height="16" width="18" viewBox="0 0 576 512" className="item cart"><path fill="#29a19c" d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+				</svg><span className="align-element translate-middle badge rounded-pill bg-danger">{cartSize!==0?cartSize:''}</span></div></Link>
+				}
+
+
+
+
 				{props.menu?<div className='collapse navbar-collapse' id='navbarToggler'>
 					<ul className='menu navbar-nav me-auto mb-2 mb-lg-0 mt-2 ps-3'>
 						<li className='nav-item item montserrat'>
@@ -46,8 +65,17 @@ const Navbar = (props) => {
 								About
 							</HashLink>
 						</li>
-
 						<li className='nav-item item montserrat'>
+							<HashLink
+								smooth
+								className='nav-link'
+								to='/dashboard/products'
+							>
+								Products
+							</HashLink>
+						</li>
+
+						{/* <li className='nav-item item montserrat'>
 							<NavDropdown title='Menu' id='basic-nav-dropdown'>
 								<NavDropdown.Item>
 									<HashLink smooth to='/dashboard/blackC#blackC'>
@@ -65,7 +93,7 @@ const Navbar = (props) => {
 									</HashLink>
 								</NavDropdown.Item>
 							</NavDropdown>
-						</li>
+						</li> */}
 
 						<li className='nav-item item montserrat'>
 							<HashLink

@@ -7,12 +7,25 @@ import BDesign2 from './../../assets/branch design down.png';
 import NY from './../../assets/new york.png';
 import Jakarta from './../../assets/jakarta.png';
 import Paris from './../../assets/paris.png';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 
 
 
 
 const Branches = () => {
+	const [branch,setBranch] = useState([]);
+
+	const getData = async()=>{
+		let result = await axios.get('http://localhost:5000/api/v1/admin/stores');
+		setBranch(result.data.data);
+		
+	}
+
+	useEffect(()=>{
+		getData();
+	},[]);
 	return (
 		<div id='branches' className='branches'>
 			<img
@@ -21,8 +34,23 @@ const Branches = () => {
 				className='branch-design-up'
 			/>
 			<h3 className='grand-hotel'>Our Branches</h3>
-			<div className='location-cards'>
-				<div className='branch-card'>
+			<div className='location-cards d-flex justify-content-evenly container'>
+
+				{branch.map((val)=>{
+					return(
+						<div key={val._id} className='branch-card'>
+							<img
+								src={val.storeImage}
+								alt={val.storeName}
+							/>
+							<p className='branch-name montserrat'>{val.storeName}</p>
+						</div>
+					);
+				})}
+
+
+
+				{/* <div className='branch-card'>
 					<img
 						src={NY}
 						alt='New York Branch'
@@ -48,7 +76,7 @@ const Branches = () => {
 					<p className='branch-info montserrat'>
 					Indulge in a Parisian coffee experience at our branch in the city of romance, where each sip is a taste of la vie en rose.
 					</p>
-				</div>
+				</div> */}
 			</div>
 			<img
 				src={BDesign2}

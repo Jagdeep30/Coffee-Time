@@ -4,6 +4,7 @@ import IntroCoffee from './../../assets/introCoffee.png';
 import IntroDesign from './../../assets/intro Design 3.png';
 
 import Button from './../Button/Button';
+import { Link } from 'react-router-dom';
 
 const Intro = ()=>{
     return(
@@ -18,7 +19,7 @@ const Intro = ()=>{
               Order Now
               <span></span><span></span><span></span><span></span>
             </button> */}
-            <Button/>
+            <Link to='/dashboard/products' className='button btn'>Buy Now</Link>
           </div>
           <img src={IntroCoffee} alt="" className=" coffee" />
           <img

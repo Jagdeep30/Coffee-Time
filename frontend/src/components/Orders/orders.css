@@ -1,0 +1,13 @@
+.count{
+    padding: 0.5rem 1rem;
+    /* background-color: cyan; */
+    margin: 0.25rem;
+    /* transform: translateY(2rem); */
+    border: #c6c6c6 0.07rem solid;
+    border-radius: 0.3rem;
+}
+
+.count-btn{
+    padding: 0.2rem 1rem;
+    border-radius: 0.3rem
+}
