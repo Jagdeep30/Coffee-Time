@@ -56,7 +56,7 @@ const Navbar = (props) => {
 								Home
 							</HashLink>
 						</li>
-						<li className='nav-item item montserrat'>
+						{/* <li className='nav-item item montserrat'>
 							<HashLink
 								smooth
 								className='nav-link'
@@ -64,7 +64,7 @@ const Navbar = (props) => {
 							>
 								About
 							</HashLink>
-						</li>
+						</li> */}
 						<li className='nav-item item montserrat'>
 							<HashLink
 								smooth

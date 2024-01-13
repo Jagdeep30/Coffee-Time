@@ -44,3 +44,10 @@
     border-radius: 50%;
     transform: rotate(347deg);
 }
+.height{
+    height: 15rem;
+}
+
+.desc-height{
+    height: 8rem;
+}

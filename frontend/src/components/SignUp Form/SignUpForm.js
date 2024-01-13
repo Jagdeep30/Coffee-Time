@@ -16,6 +16,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import updatedLogo from './../../assets/updatedLogo.png';
 import { addUserData, loggedIn } from "../../state/action-creators";
+import handleImageUpload from "../../UploadImage";
 
 const SignUpForm = (props) => {
 
@@ -40,6 +41,7 @@ const SignUpForm = (props) => {
 	const [passwordC, setPasswordC] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const [showPasswordC, setShowPasswordC] = useState(false);
+	const [image, setImage] = useState(undefined)
 
 	const params = useParams();
 	const id = params.id;
@@ -107,8 +109,9 @@ const SignUpForm = (props) => {
 
 	const handleFormSubmission = async(e)=>{
 		e.preventDefault();
-
+		let img = await handleImageUpload(image);
 		let data = new FormData(e.target);
+		data.profileImage = img;
 		let res = await axios.post('http://localhost:5000/api/v1/user',data);
 		if(res.data.status==='success'){
 			dispatch(addUserData(res.data.data));
@@ -180,6 +183,19 @@ const SignUpForm = (props) => {
 									onSubmit={handleFormSubmission}
 									encType="multipart/form-data"
 								>
+									<div className="input-group">
+								<label htmlFor="profileImage" className="form-label">Profile Image:</label>
+							<div className='form-group'>
+								<input
+									type='file'
+									id='profileImage'
+									name='profileImage'
+									className='form-control'
+									accept='image/*'
+									onChange={(e)=>{setImage(e.target.files[0])}}
+								/>
+							</div>
+							</div>
 									<div className='input-group'>
 										<label
 											htmlFor='firstname'

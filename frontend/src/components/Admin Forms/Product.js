@@ -1,13 +1,16 @@
 import React,{ useState,useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import PropTypes from 'prop-types';
+import handleImageUpload from "../../UploadImage";
 
 const Product = (props) => {
 	// const [data, setData] = useState({});
+	const navigate = useNavigate();
 	const [name,setName] = useState('');
 	const [unitPrice,setUnitPrice] = useState('');
 	const [description,setDescription] = useState('');
+	const [image, setImage] = useState(undefined);
 
 	const params = useParams();
 	const id = params.id;
@@ -40,6 +43,44 @@ const Product = (props) => {
 	}
 
 
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+		// console.log(e);
+
+		let data = new FormData(e.target);
+		// console.log(data);
+		let info = {};
+			for(let entry of data.entries()){
+				info[entry[0]] = entry[1];
+			}
+
+
+		let img = await handleImageUpload(image);
+		// console.log("entered"+img);
+		info.productImage = img.name;
+		if(props.task==='Add'){
+			
+			let res = await axios.post(`http://localhost:5000/api/v1/admin/products`,info);
+			// console.log(res);
+		}
+		else if(props.task==='Update'){
+			// console.log(info);
+			
+			// let res = await axios.patch(`/api/v1/admin/employees/${id}`,info);
+			let res = await axios.put(`http://localhost:5000/api/v1/admin/products/${id}`,info);
+			// let res = await axios({
+			// 	method: 'put',
+			// 	url: `http://localhost:5000/api/v1/admin/employees/${id}`,
+			// 	data: info
+			// });
+			// console.log(res);
+		}
+		navigate('/admin/all/products');
+
+		
+	}
+
+
 	useEffect(()=>{
 		if(props.task==='Update'){
 			getData();
@@ -56,9 +97,8 @@ const Product = (props) => {
 							<h3 className='admin-title'>{props.task} Product</h3>
 						</div>
 						<form
-							action={`http://localhost:5000/api/v1/admin/products/${id}`}
+							onSubmit={handleFormSubmission} 
 							className='form-horizontal clearfix'
-							method="POST"
 						>
 							<div className='input-group'>
 								<label
@@ -113,6 +153,7 @@ const Product = (props) => {
 										id="productimg"
 										name='productImg'
 										className='form-control'
+										onChange={(e)=>{setImage(e.target.files[0])}}
 										// required
 									/>
 								</div>

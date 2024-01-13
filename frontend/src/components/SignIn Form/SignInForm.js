@@ -1,17 +1,17 @@
 import "./signinform.css";
 
-import { Link, useNavigate, useNavigation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useDispatch,useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from "react";
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from "react";
 import updatedLogo from './../../assets/updatedLogo.png';
 import { addUserData, loggedIn } from "../../state/action-creators";
 
+axios.defaults.withCredentials = true;
 const SignInForm = () => {
 
 
 	const [showPassowrd, setShowPassowrd] = useState(false);
-	const formRef = useRef();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	
@@ -24,11 +24,12 @@ const SignInForm = () => {
 		e.preventDefault();
 
 		let data = new FormData(e.target);
+		console.log(data);
 
 		let user = await axios.post('http://localhost:5000/api/v1/user/login',data);
 
 		if(user.data.status==='success'){
-			console.log('success');
+			// console.log('success');
 			dispatch(addUserData(user.data.data));
 			dispatch(loggedIn(true));
 			user.data.data.role==='admin'?navigate('/admin'):navigate('/');
@@ -82,7 +83,7 @@ const SignInForm = () => {
 										 Login
 									</button>
 									<span className='forgot'>
-										<a href='http://localhost:5000/user/forgotPassword'>Forgot Password?</a>
+										{/* {<a href='http://localhost:5000/user/forgotPassword'>Forgot Password?</a>} */}
 									</span>
 								</form>
 							</div>

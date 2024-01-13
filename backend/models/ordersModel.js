@@ -11,16 +11,16 @@ const ordersSchema = new mongoose.Schema({
         ref:'User',
         required:true
     },
-    paymentMode:{
-        type:String,
-        required:true,
-        enum:['online','cash']
-    },
-    empID:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Employee',
-        required:true
-    },
+    // paymentMode:{
+    //     type:String,
+    //     required:true,
+    //     enum:['online','cash']
+    // },
+    // empID:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'Employee',
+    //     required:true
+    // },
     voucherID:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Voucher'

@@ -360,6 +360,25 @@ exports.getVoucher = async (req, res,next) => {
 		next(err);
 	}
 };
+exports.getVoucherFromCode = async(req,res,next)=>{
+	try{
+		let result = await voucherModel.findOne({"voucherCode":req.params.code});
+		if(!result){
+			res.status(200).json({
+				status:'fail',
+				message:"Not Found"
+			})
+		}
+		else{
+			res.status(200).json({
+				status:'success',
+				data:result
+			})
+		}
+	}catch(err){
+		next(err);
+	}
+}
 exports.getVoucherRed = async (req, res,next) => {
 	try{
 		let result = await voucherRedModel.findOne({_id:req.params.id});

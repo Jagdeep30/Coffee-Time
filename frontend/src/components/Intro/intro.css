@@ -55,6 +55,7 @@
 	object-fit: cover;
 	/* left: -7rem; */
 	display: block;
+	z-index: 2;
 }
 
 .shd {

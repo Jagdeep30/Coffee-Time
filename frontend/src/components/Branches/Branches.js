@@ -4,11 +4,12 @@ import './../../button.css';
 import BDesign1 from './../../assets/branch up design.png';
 // import BDesign2 from './../../assets/branch down design.png';
 import BDesign2 from './../../assets/branch design down.png';
-import NY from './../../assets/new york.png';
-import Jakarta from './../../assets/jakarta.png';
-import Paris from './../../assets/paris.png';
+// import NY from './../../assets/new york.png';
+// import Jakarta from './../../assets/jakarta.png';
+// import Paris from './../../assets/paris.png';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import downloadImage from "../../DownloadImage";
 
 
 
@@ -19,8 +20,16 @@ const Branches = () => {
 
 	const getData = async()=>{
 		let result = await axios.get('http://localhost:5000/api/v1/admin/stores');
-		setBranch(result.data.data);
-		
+		const branchWithImages = await Promise.all(
+			result.data.data.map(async (val) => {
+			  let url = await downloadImage(val.storeImage);
+			  val.storeImage = url;
+			  return val;
+			})
+		  );
+
+		setBranch(branchWithImages);
+		// console.log(result.data.data);
 	}
 
 	useEffect(()=>{

@@ -35,6 +35,9 @@ exports.addUser = async(req,res,next)=>{
         data.password = pass;
         let result = await userModel.create(data);
 
+        req.session.currUser = result;
+        console.log(req.session.currUser);
+
         createToken(result,res,'User created Successfully',200);
         // res.status(200).json({
         //     status:'success',
@@ -50,7 +53,7 @@ exports.addUser = async(req,res,next)=>{
 exports.login = async(req,res,next)=>{
     try{
         let {email,password} = req.body;
-        console.log(req.body);
+        // console.log(req);
 
         let user = await userModel.findOne({email}).select("+password");
         if(!user)next(new Error('Invalid Credentials'));
@@ -58,6 +61,10 @@ exports.login = async(req,res,next)=>{
         // console.log(user);
         let passMatch = await bcrypt.compare(password,user.password);
         if(!passMatch) next(new Error("Invalid Credentials"));
+
+        // req.session.currUser = user;
+        req.session.currUser = user;
+        console.log(req.session.currUser);
 
         createToken(user,res,"Login Successful",200);
     }catch(err){

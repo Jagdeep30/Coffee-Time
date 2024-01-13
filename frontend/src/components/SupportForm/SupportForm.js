@@ -61,16 +61,6 @@ const SupportForm = ()=>{
 															<i className='fa fa-user'></i>
 														</span>
 														<input
-															type='tel'
-															className='form-control'
-															placeholder='Phone'
-														/>
-													</div>
-													<div className='form-group'>
-														<span className='input-icon'>
-															<i className='fa fa-user'></i>
-														</span>
-														<input
 															type='email'
 															className='form-control'
 															placeholder='Email'
@@ -90,29 +80,7 @@ const SupportForm = ()=>{
 													
 
 
-													{/* <div className='form-group'>
-														<span className='input-icon'>
-															<i className='fa fa-user'></i>
-														</span>
-														<span>Payment: </span>
-														<input
-															id='upi'
-															type='text'
-															className=''
-														/>
-														<label htmlFor='upi'>
-															UPI
-														</label>
-														<input
-															id='card'
-															type='text'
-															className=''
-														/>
-														<label htmlFor='card'>
-															Card
-														</label>
-													</div> */}
-
+													
 													
 												</form>
 											</div>
@@ -127,7 +95,7 @@ const SupportForm = ()=>{
 								className='btn btn-secondary'
 								data-bs-dismiss='modal'
 							>
-								Change
+								Cancel
 							</button>
 							<button
 								type='button'

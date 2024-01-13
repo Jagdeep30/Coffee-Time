@@ -45,14 +45,14 @@ const Admin = () => {
 						</Route>
 
 						<Route path="/all">
-						<Route exact path='products' element={<Table collection='product'/>} />
-						<Route exact path='employees' element={<Table collection='employee'/>} />
-						<Route exact path='jobs' element={<Table collection='job'/>} />
-						<Route exact path='items' element={<Table collection='item'/>} />
-						<Route exact path='itemstocks' element={<Table collection='itemStock'/>} />
-						<Route exact path='stores' element={<Table collection='store'/>} />
-						<Route exact path='suppliers' element={<Table collection='supplier'/>} />
-						<Route exact path='vouchers' element={<Table collection='voucher'/>} />
+						<Route exact path='products' element={<Table collection='products'/>} />
+						<Route exact path='employees' element={<Table collection='employees'/>} />
+						<Route exact path='jobs' element={<Table collection='jobs'/>} />
+						<Route exact path='items' element={<Table collection='items'/>} />
+						<Route exact path='itemstocks' element={<Table collection='itemStocks'/>} />
+						<Route exact path='stores' element={<Table collection='stores'/>} />
+						<Route exact path='suppliers' element={<Table collection='suppliers'/>} />
+						<Route exact path='vouchers' element={<Table collection='vouchers'/>} />
 						</Route>
 
 					</Routes>

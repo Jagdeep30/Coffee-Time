@@ -4,7 +4,7 @@ import './adminForm.css';
 import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
 
-
+axios.defaults.withCredentials = true;
 
 
 const Employee = (props) => {
@@ -52,6 +52,10 @@ const Employee = (props) => {
 
 	const getData = async()=>{
 		result = await axios.get(`http://localhost:5000/api/v1/admin/employees/${id}`);
+		console.log(result.data.status);
+		if(result.data.status === 'fail'){
+			navigate('/signin')
+		}
 		// console.log(result.data);
 		setFirstName(result.data.data.firstName);
 		setLastName(result.data.data.lastName);
@@ -111,9 +115,9 @@ const Employee = (props) => {
 
 
 
-	const axiosBackend = axios.create({
-		baseURL: 'http://localhost:5000/api/v1/admin',
-	  });
+	// const axiosBackend = axios.create({
+	// 	baseURL: 'http://localhost:5000/api/v1/admin',
+	//   });
 	  
 	const handleFormSubmission = async(e)=>{
 		e.preventDefault();

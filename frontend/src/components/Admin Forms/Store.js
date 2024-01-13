@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import handleImageUpload from '../../UploadImage';
 
 const Store = (props) => {
+	const navigate = useNavigate();
 	const [storeName, setStoreName] = useState('');
 
 	const [states, setStates] = useState([]);
@@ -11,6 +13,7 @@ const Store = (props) => {
 	const [countryID, setCountryID] = useState('');
 	const [stateID, setStateID] = useState('state');
 	const [cityID, setCityID] = useState('city');
+	const [image, setImage] = useState(undefined)
 	
 
 	const params = useParams();
@@ -70,6 +73,51 @@ const Store = (props) => {
 		setCities(d.data.data);
 	}
 
+
+
+
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+		// console.log(e);
+
+		let data = new FormData(e.target);
+		// console.log(data);
+		let info = {};
+			for(let entry of data.entries()){
+				info[entry[0]] = entry[1];
+			}
+
+
+		let img = await handleImageUpload(image);
+		// console.log("entered"+img);
+		info.storeImage = img.name;
+		if(props.task==='Add'){
+			
+			let res = await axios.post(`http://localhost:5000/api/v1/admin/stores`,info);
+			// console.log(res);
+		}
+		else if(props.task==='Update'){
+			// console.log(info);
+			
+			// let res = await axios.patch(`/api/v1/admin/employees/${id}`,info);
+			let res = await axios.put(`http://localhost:5000/api/v1/admin/stores/${id}`,info);
+			// let res = await axios({
+			// 	method: 'put',
+			// 	url: `http://localhost:5000/api/v1/admin/employees/${id}`,
+			// 	data: info
+			// });
+			// console.log(res);
+		}
+		navigate('/admin/all/stores');
+
+		
+	}
+	
+
+
+
+
+
 	useEffect(()=>{
 		getStates(countryID);
 	},[countryID]);
@@ -93,7 +141,8 @@ const Store = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Store</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/stores/${id}`} method="POST"  className='form-horizontal clearfix'>
+						{/* <form action={`http://localhost:5000/api/v1/admin/stores/${id}`} method="POST"  className='form-horizontal clearfix'> */}
+						<form onSubmit={handleFormSubmission} className='form-horizontal clearfix'>
 						<div className="input-group">
 								<label htmlFor="firstname" className="form-label">Store Name:</label>
 								<div className='form-group'>
@@ -115,8 +164,10 @@ const Store = (props) => {
 								<input
 									type='file'
 									id='storeimg'
-									name='storeImg'
+									name='storeImage'
 									className='form-control'
+									accept='image/*'
+									onChange={(e)=>{setImage(e.target.files[0])}}
 								/>
 							</div>
 							</div>

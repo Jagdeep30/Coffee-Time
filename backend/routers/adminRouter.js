@@ -1,46 +1,28 @@
 const express = require("express");
-const { addvoucher, addEmp, addjob, addproduct, additem, additemstock, addstore, addsupplier, updateProduct, updateEmployee, updateJob, updateItem, updateItemStock, updateStore, updateSupplier } = require("../controllers/adminController");
-const { getAllCountries, getAllStates, getAllCities, getAllProducts, getProduct, getAllEmployees, getAllItems, getAllItemStocks, getAllJobs, getAllOrderDetails, getAllOrders, getAllStores, getAllSuppliers, getAllUsers, getAllVouchers, getAllVoucherReds, getEmployees, getEmployee, getItem, getItemStock, getJob, getOrderDetail, getOrder, getStore, getSupplier, getUser, getVoucher, getVoucherRed, getState, getCity } = require("../controllers/getterController.js");
+const { addvoucher, addEmp, addjob, addproduct, additem, additemstock, addstore, addsupplier, updateProduct, updateEmployee, updateJob, updateItem, updateItemStock, updateStore, updateSupplier, addOrderDetails, addOrder, deleteProduct, deleteEmployee, deleteItem, deleteItemStock, deleteJob, deleteOrderDetails, deleteOrder, deleteStore, deleteSupplier, deleteVoucher, addVoucherRed } = require("../controllers/adminController");
+const { getAllCountries, getAllStates, getAllCities, getAllProducts, getProduct, getAllEmployees, getAllItems, getAllItemStocks, getAllJobs, getAllOrderDetails, getAllOrders, getAllStores, getAllSuppliers, getAllUsers, getAllVouchers, getAllVoucherReds, getEmployees, getEmployee, getItem, getItemStock, getJob, getOrderDetail, getOrder, getStore, getSupplier, getUser, getVoucher, getVoucherRed, getState, getCity, getVoucherFromCode } = require("../controllers/getterController.js");
+const verifyReq = require("../middlewares/verifyMiddleware.js");
 
 
-const multer  = require('multer')
-const upload = multer({ dest: '../uploads/' })
 
 const router = express.Router();
 
-// router.route("/addvoucher").post(addvoucher);
-// router.route("/addEmp").post(addEmp);
-// router.route("/addJob").post(addjob);
-// router.route("/addProduct").post(addproduct);
-// router.route("/addItem").post(additem);
-// router.route("/addItemstock").post(additemstock);
-// router.route("/addStore").post(addstore);
-// router.route("/addSupplier").post(addsupplier);
+router.route("/states/:id").get(verifyReq,getAllStates); // to get all states according to countryID
+router.route("/cities/:id").get(verifyReq,getAllCities); // to get all cities according to stateID
 
-// router.route('/updateEmp').post(updateEmployee);
-// router.route('/updateJob').post(updateJob);
-// router.route('/updateProduct').post(updateProduct);
-// router.route('/updateItem').post(updateItem);
-// router.route('/updateItemStock').post(updateItemStock);
-// router.route('/updateStore').post(updateStore);
-// router.route('/updateSupplier').post(updateSupplier);
-
-router.route("/states/:id").get(getAllStates); // to get all states according to countryID
-router.route("/cities/:id").get(getAllCities); // to get all cities according to stateID
-
-router.route("/countries").get(getAllCountries);
-router.route('/products').get(getAllProducts).post(upload.single(),addproduct);
-router.route('/employees').get(getAllEmployees).post(upload.none(),addEmp);
-router.route('/items').get(getAllItems).post(upload.none(),additem);
-router.route('/itemStocks').get(getAllItemStocks).post(upload.none(),additemstock);
-router.route('/jobs').get(getAllJobs).post(upload.none(),addjob);
-router.route('/orderDetails').get(getAllOrderDetails);
-router.route('/orders').get(getAllOrders);
-router.route('/stores').get(getAllStores).post(upload.single(),addstore);
-router.route('/suppliers').get(getAllSuppliers).post(upload.none(),addsupplier);
-router.route('/users').get(getAllUsers);
-router.route('/vouchers').get(getAllVouchers).post(upload.none(),addvoucher);
-router.route('/voucherReds').get(getAllVoucherReds);
+router.route("/countries").get(verifyReq,getAllCountries);
+router.route('/products').get(getAllProducts).post(verifyReq,addproduct);
+router.route('/employees').get(verifyReq,getAllEmployees).post(verifyReq,addEmp);
+router.route('/items').get(verifyReq,getAllItems).post(verifyReq,additem);
+router.route('/itemStocks').get(verifyReq,getAllItemStocks).post(verifyReq,additemstock);
+router.route('/jobs').get(verifyReq,getAllJobs).post(verifyReq,addjob);
+router.route('/orderDetails').get(verifyReq,getAllOrderDetails).post(verifyReq,addOrderDetails);
+router.route('/orders').get(verifyReq,getAllOrders).post(verifyReq,addOrder);
+router.route('/stores').get(getAllStores).post(verifyReq,addstore);
+router.route('/suppliers').get(verifyReq,getAllSuppliers).post(verifyReq,addsupplier);
+router.route('/users').get(verifyReq,getAllUsers);
+router.route('/vouchers').get(verifyReq,getAllVouchers).post(verifyReq,addvoucher);
+router.route('/voucherReds').get(verifyReq,getAllVoucherReds).post(verifyReq,addVoucherRed);
 
 
 
@@ -48,18 +30,18 @@ router.route('/voucherReds').get(getAllVoucherReds);
 // router.route("/cities/:id").get(getCity);
 
 
-router.route('/products/:id').get(getProduct).put(upload.single(),updateProduct);
-router.route('/employees/:id').get(getEmployee).put(upload.none(),updateEmployee);
-router.route('/items/:id').get(getItem).put(upload.none(),updateItem);
-router.route('/itemStocks/:id').get(getItemStock).put(upload.none(),updateItemStock);
-router.route('/jobs/:id').get(getJob).put(upload.none(),updateJob);
-router.route('/orderDetails/:id').get(getOrderDetail);
-router.route('/orders/:id').get(getOrder);
-router.route('/stores/:id').get(getStore).put(upload.single(),updateStore);
-router.route('/suppliers/:id').get(getSupplier).put(upload.none(),updateSupplier);
-router.route('/users/:id').get(getUser);
-router.route('/vouchers/:id').get(getVoucher);
-router.route('/voucherReds/:id').get(getVoucherRed);
-
+router.route('/products/:id').get(getProduct).put(verifyReq,updateProduct).delete(verifyReq,deleteProduct);
+router.route('/employees/:id').get(verifyReq,getEmployee).put(verifyReq,updateEmployee).delete(verifyReq,deleteEmployee);
+router.route('/items/:id').get(verifyReq,getItem).put(verifyReq,updateItem).delete(verifyReq,deleteItem);
+router.route('/itemStocks/:id').get(verifyReq,getItemStock).put(verifyReq,updateItemStock).delete(verifyReq,deleteItemStock);
+router.route('/jobs/:id').get(verifyReq,getJob).put(verifyReq,updateJob).delete(verifyReq,deleteJob);
+router.route('/orderDetails/:id').get(verifyReq,getOrderDetail).delete(verifyReq,deleteOrderDetails);
+router.route('/orders/:id').get(verifyReq,getOrder).delete(verifyReq,deleteOrder);
+router.route('/stores/:id').get(verifyReq,getStore).put(verifyReq,updateStore).delete(verifyReq,deleteStore);
+router.route('/suppliers/:id').get(verifyReq,getSupplier).put(verifyReq,updateSupplier).delete(verifyReq,deleteSupplier);
+// router.route('/users/:id').get(getUser);
+router.route('/vouchers/:id').get(verifyReq,getVoucher).delete(verifyReq,deleteVoucher);
+router.route('/voucherReds/:id').get(verifyReq,getVoucherRed);
+router.route('/vouchers/code/:code').get(verifyReq,getVoucherFromCode);
 
 module.exports = router;
