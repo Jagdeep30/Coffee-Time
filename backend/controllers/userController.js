@@ -108,3 +108,15 @@ exports.updateUser = async(req,res,next)=>{
         next(err);
     }
 }
+
+exports.deleteUser = async(req,res,next)=>{
+    try{
+        await userModel.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            status:'success',
+            message:"User deleted successfully"
+        })
+    }catch(err){
+        next(err);
+    }
+}

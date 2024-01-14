@@ -11,14 +11,13 @@ const SupportForm = ()=>{
 	const [email, setEmail] = useState('');
 	const [query, setQuery] = useState('');
 
-	const handleFormSubmission = ()=>{
+	const handleFormSubmission = async()=>{
 		emailjs.send('service_8ceqcpy', 'template_y91ll8q','p21Ad1fVDax1SkFNS', {name,email,mesaage:query})
 			.then((result) => {
 				console.log(result.text);
 			}, (error) => {
 				console.log(error.text);
 			});
-		};
 		// await axios.post('https://api.emailjs.com/api/v1.0/email/send',{
 		// 	service_id:"service_8ceqcpy",
 		// 	template_id:"template_y91ll8q",
@@ -27,8 +26,10 @@ const SupportForm = ()=>{
 		// 		name,
 		// 		email,
 		// 		message:query
-		// 	}
+		// 	},
+		// 	withCredentials:true
 		// })
+	};
 	
     return(
         <>

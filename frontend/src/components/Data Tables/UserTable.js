@@ -43,7 +43,7 @@ const UserTable = (props) => {
 
 	const getData = async () => {
 		let result = await axios.get(`http://localhost:5000/api/v1/user`);
-		if(result.data.status === 'fail')navigate('/signin')
+		if(result.data.status === 'fail')navigate('/signin');
 		// setData(result.data.data);
 		let data = result.data.data;
 		
@@ -70,7 +70,7 @@ const UserTable = (props) => {
 	};
 
 	const handleDeleteRequest = async (id) => {
-		await axios.delete(`http://localhost:5000/api/v1/admin/${str}/${id}`);
+		await axios.delete(`http://localhost:5000/api/v1/user/${id}`);
 		setUpdate(!update);
 		// navigate(`/admin/all/${str}`);
 		
@@ -78,7 +78,7 @@ const UserTable = (props) => {
 
 	useEffect(() => {
 		getData();
-	}, [props.collection]);
+	}, []);
 	useEffect(()=>{
 		getData();
 	},[update]);

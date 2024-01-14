@@ -11,36 +11,36 @@ const Table = (props) => {
 	const [update, setUpdate] = useState(false);
 
 	const [country, setCountry] = useState([]);
-	const [state, setState] = useState([]);
-	const [city, setCity] = useState([]);
-	const [store, setStore] = useState([]);
-	const [supplier, setSupplier] = useState([]);
+	// const [state, setState] = useState([]);
+	// const [city, setCity] = useState([]);
+	// const [store, setStore] = useState([]);
+	// const [supplier, setSupplier] = useState([]);
 
-	const getCountry = async(id)=>{
-		let res = await axios.get(`http://localhost:5000/api/v1/admin/countries/${id}`);
-		let d = await res;
-		setCountry(d.data.data);
-	}
+	// const getCountry = async(id)=>{
+	// 	let res = await axios.get(`http://localhost:5000/api/v1/admin/countries/${id}`);
+	// 	let d = await res;
+	// 	setCountry(d.data.data);
+	// }
 
-	const getState = async(id)=>{
-		let res = await axios.get(`http://localhost:5000/api/v1/admin/states/${id}`);
-		// setCountry(d.data.data);
-	}
+	// const getState = async(id)=>{
+	// 	let res = await axios.get(`http://localhost:5000/api/v1/admin/states/${id}`);
+	// 	// setCountry(d.data.data);
+	// }
 
-	const getCity = async(id)=>{
-		let res = await axios.get(`http://localhost:5000/api/v1/admin/cities/${id}`);
-		// setCountry(d.data.data);
-	}
+	// const getCity = async(id)=>{
+	// 	let res = await axios.get(`http://localhost:5000/api/v1/admin/cities/${id}`);
+	// 	// setCountry(d.data.data);
+	// }
 
-	const getStore = async(id)=>{
-		let res = await axios.get(`http://localhost:5000/api/v1/admin/stores/${id}`);
-		// setCountry(d.data.data);
-	}
+	// const getStore = async(id)=>{
+	// 	let res = await axios.get(`http://localhost:5000/api/v1/admin/stores/${id}`);
+	// 	// setCountry(d.data.data);
+	// }
 
-	const getSupplier = async(id)=>{
-		let res = await axios.get(`http://localhost:5000/api/v1/admin/suppliers/${id}`);
-		// setCountry(d.data.data);
-	}
+	// const getSupplier = async(id)=>{
+	// 	let res = await axios.get(`http://localhost:5000/api/v1/admin/suppliers/${id}`);
+	// 	// setCountry(d.data.data);
+	// }
 
 	const getData = async () => {
 		let result = await axios(`http://localhost:5000/api/v1/admin/${str}`);
@@ -53,6 +53,10 @@ const Table = (props) => {
 			if(val.hasOwnProperty('storeID')){
 				let co = await axios.get(`http://localhost:5000/api/v1/admin/stores/${val.storeID}`);
 				val.storeID = co.data.data.storeName;
+			}
+			if(val.hasOwnProperty('supplierID')){
+				let co = await axios.get(`http://localhost:5000/api/v1/admin/suppliers/${val.supplierID}`);
+				val.supplierID = co.data.data.supplierName;
 			}
 			if(val.hasOwnProperty('jobID')){
 				let co = await axios.get(`http://localhost:5000/api/v1/admin/jobs/${val.jobID}`);
