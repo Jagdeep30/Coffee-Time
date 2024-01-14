@@ -84,22 +84,25 @@ const Orders = () => {
       navigate('/signin');
       return
     }
-    let reqData = {
-      userID : user._id
-    };
-    let redempData = {};
+    // let reqData = {
+    //   userID : user._id
+    // };
+    let reqData = new FormData();
+    reqData.append("userID",user._id);
 
-    if(voucher){
+    let redempData = new FormData();
+
+    if(voucher && voucherCode){
         let voucherResult = await axios.get(`http://localhost:5000/api/v1/admin/vouchers/code/${voucherCode}`);
         // let voucherResult = getVoucher(voucherCode);
-        console.log(voucherResult.data.data);
+        // console.log(voucherResult.data.data);
         // let vouc = voucherResult.data.data;
         if(voucherResult.data.status==='fail'){
           alert("Invalid voucher code");
           return;
         }
         else{
-          reqData.voucherID = voucherResult.data.data._id;
+          reqData.append("voucherID",voucherResult.data.data._id);
           if(voucherResult.data.data.amount>=totalPrice){
             setTotalPrice(0);
           }
@@ -107,29 +110,36 @@ const Orders = () => {
             setTotalPrice(totalPrice-(voucherResult.data.data.amount));
           }
         }
-        redempData = {
-          voucherID:voucherResult.data.data._id,
+        redempData.append("voucherID",voucherResult.data.data._id);
+        redempData.append("userID",user._id);
+        // redempData = {
+        //   voucherID:voucherResult.data.data._id,
           
-          userID:user._id
-        }
+        //   userID:user._id
+        // }
+      
         // console.log("----------------------------------------------------------------------------");
         // await axios.post('http://localhost:5000/api/v1/admin/voucherReds',redempData);
     }
-    
+    // console.log(voucher);
     let res = await axios.post('http://localhost:5000/api/v1/admin/orders',reqData);
 
     for( let item of items.entries()){
-      let itemData = {
-        quantity:item[1],
-        orderID:res.data.data._id,
-        productID:item[0]
-      }
+      let itemData = new FormData();
+      itemData.append("quantity",item[1]);
+      itemData.append("orderID",res.data.data._id);
+      itemData.append("productID",item[0]);
+      // let itemData = {
+      //   quantity:item[1],
+      //   orderID:res.data.data._id,
+      //   productID:item[0]
+      // }
       await axios.post('http://localhost:5000/api/v1/admin/orderDetails',itemData)
     }
     
 
-    if(voucher){
-      redempData.orderID = res.data.data._id;
+    if(voucher && voucherCode){
+      redempData.append("orderID",res.data.data._id);
       // console.log("----------------------------------------------------------------------------");
       await axios.post('http://localhost:5000/api/v1/admin/voucherReds',redempData);
     }
@@ -159,7 +169,7 @@ const Orders = () => {
                     <img src={val.productImage} className="card-img-top height" alt="..." />
                     <div className="card-body mb-0">
                         <h5 className="card-title montserrat product-name">{val.name}</h5>
-                        <p className="card-text desc-height">{val.description}</p>
+                        {/* <p className="card-text desc-height">{val.description}</p> */}
                     </div>
                     <ul className="list-group list-group-flush mb-0">
                         <li className="list-group-item fw-bold">Price : {val.unitPrice}</li>
@@ -178,7 +188,7 @@ const Orders = () => {
         <div id="liveAlertPlaceholder">
           {order && <div className="alert alert-success alert-dismissible" role="alert">
           <div>Order Placed={'>'}{orderId}</div>
-            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="" onClick={()=>{setOrder(false)}}></button>
+            <button type="button" className="btn-close" data-bs-dismiss="" aria-label="" onClick={()=>{setOrder(false)}}></button>
           </div>}
         <div className="badge bg-secondary amt">Total Amount: {totalPrice}</div>
 

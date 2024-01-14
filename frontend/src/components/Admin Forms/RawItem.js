@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const RawItem = (props) => {
 	const [itemName, setItemName] = useState('');
+
+	const navigate = useNavigate();
 
 	const params = useParams();
 	const id = params.id;
@@ -24,6 +26,41 @@ const RawItem = (props) => {
 		setItemName(e.target.value);
 	}
 
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+		// console.log(e);
+
+		let data = new FormData(e.target);
+		console.log(data);
+
+		let info = data;
+		// let info = {};
+		// 	for(let entry of data.entries()){
+		// 		info[entry[0]] = entry[1];
+		// 	}
+
+		if(props.task==='Add'){
+			
+			let res = await axios.post(`http://localhost:5000/api/v1/admin/items`,info);
+			// console.log(res);
+		}
+		else if(props.task==='Update'){
+			// console.log(info);
+			
+			// let res = await axios.patch(`/api/v1/admin/employees/${id}`,info);
+			// let res = axiosBackend.put(`/employees/${id}`,info);
+			let res = await axios({
+				method: 'put',
+				url: `http://localhost:5000/api/v1/admin/items/${id}`,
+				data: info
+			});
+			// console.log(res);
+		}
+		navigate('/admin/all/items');
+
+		return;
+	}
+
 	useEffect(()=>{
 		if(props.task==='Update'){
 			getData();
@@ -39,7 +76,7 @@ const RawItem = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Item</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/items/${id}`} method="POST"  className='form-horizontal clearfix'>
+						<form onSubmit={handleFormSubmission} className='form-horizontal clearfix' encType='multipart/form-data'>
 						<div className="input-group">
 								<label htmlFor="item" className="form-label">Item Name:</label>
 							<div className='form-group'>

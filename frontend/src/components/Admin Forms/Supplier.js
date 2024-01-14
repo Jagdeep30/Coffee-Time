@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Supplier = (props) => {
 	const [states, setStates] = useState([]);
@@ -16,6 +16,7 @@ const Supplier = (props) => {
 	const [stateID, setStateID] = useState('state');
 	const [cityID, setCityID] = useState('city');
 
+	const navigate = useNavigate();
 	const params = useParams();
 	const id = params.id;
 	let result = '';
@@ -93,6 +94,40 @@ const Supplier = (props) => {
 		setCities(d.data.data);
 	}
 
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+		// console.log(e);
+
+		let data = new FormData(e.target);
+		// let info = {};
+		// 	for(let entry of data.entries()){
+		// 		info[entry[0]] = entry[1];
+		// 	}
+
+		let info = data;
+
+		if(props.task==='Add'){
+			
+			let res = await axios.post(`http://localhost:5000/api/v1/admin/suppliers`,info);
+			// console.log(res);
+		}
+		else if(props.task==='Update'){
+			// console.log(info);
+			
+			// let res = await axios.patch(`/api/v1/admin/employees/${id}`,info);
+			// let res = axiosBackend.put(`/employees/${id}`,info);
+			let res = await axios({
+				method: 'put',
+				url: `http://localhost:5000/api/v1/admin/suppliers/${id}`,
+				data: info
+			});
+			// console.log(res);
+		}
+		navigate('/admin/all/suppliers');
+
+		return;
+	}
+
 	useEffect(()=>{
 		getStates(countryID);
 	},[countryID]);
@@ -116,7 +151,7 @@ const Supplier = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Supplier</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/suppliers/${id}`} method="POST" className='form-horizontal clearfix'>
+						<form onSubmit={handleFormSubmission} encType='multipart/form-data' className='form-horizontal clearfix'>
 							<div className="input-group">
 								<label htmlFor="supplier" className="form-label">Supplier Name:</label>
 							<div className='form-group'>

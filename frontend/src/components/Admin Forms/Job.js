@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Job = (props) => {
 	const [jobName, setJobName] = useState('');
 	const [salary, setSalary] = useState('');
+
+	const navigate = useNavigate();
 
 	const params = useParams();
 	const id = params.id;
@@ -33,6 +35,40 @@ const Job = (props) => {
 		setSalary(e.target.value);
 	}
 
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+		// console.log(e);
+
+		let data = new FormData(e.target);
+		// let info = {};
+		// 	for(let entry of data.entries()){
+		// 		info[entry[0]] = entry[1];
+		// 	}
+
+		let info = data;
+
+		if(props.task==='Add'){
+			
+			let res = await axios.post(`http://localhost:5000/api/v1/admin/jobs`,info);
+			// console.log(res);
+		}
+		else if(props.task==='Update'){
+			// console.log(info);
+			
+			// let res = await axios.patch(`/api/v1/admin/employees/${id}`,info);
+			// let res = axiosBackend.put(`/employees/${id}`,info);
+			let res = await axios({
+				method: 'put',
+				url: `http://localhost:5000/api/v1/admin/jobs/${id}`,
+				data: info
+			});
+			// console.log(res);
+		}
+		navigate('/admin/all/jobs');
+
+		return;
+	}
+
 	useEffect(()=>{
 		if(props.task==='Update'){
 			getData();
@@ -47,7 +83,7 @@ const Job = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Job</h3>
 						</div>
-						<form action={`http://localhost:5000/api/v1/admin/jobs/${id}`} method='POST' className='form-horizontal clearfix'>
+						<form onSubmit={handleFormSubmission} encType='multipart/form-data' className='form-horizontal clearfix'>
 						<div className="input-group">
 								<label htmlFor="jobname" className="form-label">Job Name:</label>
 							<div className='form-group'>

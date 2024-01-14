@@ -4,11 +4,12 @@ const express = require("express");
 // const multer = require('multer');
 
 // const app = require("../app.js");
-const { addUser, login } = require("../controllers/userController.js");
+const { addUser, login, getUser, getUsers, updateUser } = require("../controllers/userController.js");
 
 const router = express.Router();
 
 router.route('/login').post(login);
-router.route("/").post(addUser);
+router.route('/:id').get(getUser).put(updateUser);
+router.route("/").post(addUser).get(getUsers);
 
 module.exports = router;

@@ -30,15 +30,15 @@ const Product = (props) => {
 	}
 
 	const handleNameChange = (e)=>{
-		console.log(e);
+		// console.log(e);
 		setName(e.target.value);
 	}
 	const handlePriceChange = (e)=>{
-		console.log(e);
+		// console.log(e);
 		setUnitPrice(e.target.value);
 	}
 	const handleDescChange = (e)=>{
-		console.log(e);
+		// console.log(e);
 		setDescription(e.target.value);
 	}
 
@@ -48,16 +48,20 @@ const Product = (props) => {
 		// console.log(e);
 
 		let data = new FormData(e.target);
-		// console.log(data);
-		let info = {};
-			for(let entry of data.entries()){
-				info[entry[0]] = entry[1];
-			}
-
-
 		let img = await handleImageUpload(image);
+		// console.log(data);
+		// let info = {};
+		// 	for(let entry of data.entries()){
+		// 		info[entry[0]] = entry[1];
+		// 	}
+
+		data.append('productImage',img.name);
+		// console.log(data.get('productImage'));
+
+		// console.log(data);
+		let info = data;
 		// console.log("entered"+img);
-		info.productImage = img.name;
+		// info.productImage = img.name;
 		if(props.task==='Add'){
 			
 			let res = await axios.post(`http://localhost:5000/api/v1/admin/products`,info);
@@ -98,6 +102,7 @@ const Product = (props) => {
 						</div>
 						<form
 							onSubmit={handleFormSubmission} 
+							encType="multipart/form-data"
 							className='form-horizontal clearfix'
 						>
 							<div className='input-group'>

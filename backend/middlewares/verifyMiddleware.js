@@ -7,8 +7,8 @@ const verifyReq = (req,res,next)=>{
     
         let cookie = req.cookies;
         let user = req.session.currUser;
-        console.log(user);
-        console.log(cookie);
+        // console.log(user);
+        // console.log(cookie);
         if(user===undefined || !cookie.token){
             res.status(200).json({
                 status:'fail',

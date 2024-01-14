@@ -71,3 +71,40 @@ exports.login = async(req,res,next)=>{
         next(err);
     }
 }
+
+exports.getUser = async (req, res,next) => {
+	try{
+		let result = await userModel.findOne({_id:req.params.id});
+		res.status(200).json({
+			status:'success',
+			data:result
+		});
+
+	}catch(err){
+		next(err);
+	}
+};
+
+exports.getUsers = async(req,res,next)=>{
+    try{
+        let result = await userModel.find();
+        res.status(200).json({
+            status:'success',
+            data:result
+        })
+    }catch(err){
+        next(err);
+    }
+}
+
+exports.updateUser = async(req,res,next)=>{
+    try{
+        let result = await userModel.findByIdAndUpdate({_id:req.params.id},req.body);
+        res.status(200).json({
+            status:'success',
+            message:"User Updated Successfully"
+        })
+    }catch(err){
+        next(err);
+    }
+}

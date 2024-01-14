@@ -11,11 +11,12 @@ import Store from "../Admin Forms/Store";
 import Supplier from "../Admin Forms/Supplier";
 import Voucher from "../Admin Forms/Voucher";
 import Table from "../Data Tables/Table";
+import UserTable from "../Data Tables/UserTable";
 
 const Admin = () => {
 	return (
 		<div>
-			<div style={{'color':'red'}}>ADD THE CODE FOR STORING IMAGES IN DATABASE THROUGH CLOUD OR ANYTHING ELSE </div>
+			{/* <div style={{'color':'red'}}>ADD THE CODE FOR STORING IMAGES IN DATABASE THROUGH CLOUD OR ANYTHING ELSE </div> */}
 			<Navbar
 				profileImg='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTirwPXcQ5lYts8qcm8Qtqyw2KXfEwlME2XPQ&usqp=CAU'
 				menu={false}
@@ -53,6 +54,7 @@ const Admin = () => {
 						<Route exact path='stores' element={<Table collection='stores'/>} />
 						<Route exact path='suppliers' element={<Table collection='suppliers'/>} />
 						<Route exact path='vouchers' element={<Table collection='vouchers'/>} />
+						<Route exact path='users' element={<UserTable/>} />
 						</Route>
 
 					</Routes>

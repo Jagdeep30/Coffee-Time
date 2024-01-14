@@ -36,7 +36,7 @@ const Products = () => {
     <div className="fluid-container d-flex flex-column align-items-center products">
         <h3 className='grand-hotel heading'>Products</h3>
 
-        <div className="container d-flex justify-content-evenly">
+        <div className="fluid-container d-flex justify-content-evenly" style={{"width":"100%"}}>
         {products.length!==0 && products.map((val)=>{
             return(
                 <div key={val._id} className="card text-center" style={{"width": "18rem"}}>

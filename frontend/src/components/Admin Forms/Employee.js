@@ -52,7 +52,7 @@ const Employee = (props) => {
 
 	const getData = async()=>{
 		result = await axios.get(`http://localhost:5000/api/v1/admin/employees/${id}`);
-		console.log(result.data.status);
+		// console.log(result.data.status);
 		if(result.data.status === 'fail'){
 			navigate('/signin')
 		}
@@ -121,13 +121,15 @@ const Employee = (props) => {
 	  
 	const handleFormSubmission = async(e)=>{
 		e.preventDefault();
-		console.log(e);
+		// console.log(e);
 
 		let data = new FormData(e.target);
-		let info = {};
-			for(let entry of data.entries()){
-				info[entry[0]] = entry[1];
-			}
+		// let info = {};
+		// 	for(let entry of data.entries()){
+		// 		info[entry[0]] = entry[1];
+		// 	}
+
+		let info = data;
 
 		if(props.task==='Add'){
 			

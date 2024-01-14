@@ -28,14 +28,15 @@ const User = () => {
 
 				<section style={{ height: "fit-content", width: "100%" }}>
 					<Routes>
-						<Route path='review' element={<Review />} />
+						{/* <Route path='review' element={<Review />} /> */}
 						<Route path='branches' element={<Branches />} />
-						<Route path='blackC' element={<BlackC />} />
+						{/* <Route path='blackC' element={<BlackC />} />
 						<Route path='whiteC' element={<WhiteC />} />
-						<Route path='hotC' element={<HotC />} />
+						<Route path='hotC' element={<HotC />} /> */}
 						<Route path='timings' element={<Timing />} />
 						<Route path='signin' element={<SignInForm />} />
 						<Route path='signup' element={<SignUpForm task='Add'/>} />
+						<Route path='updateProfile' element={<SignUpForm task='Update'/>} />
 						<Route path="products" element={<Products/>}/>
 						<Route path="voucher" element={isForm?<Form formm={setIsForm}/> : <Voucher formm={setIsForm}/>}/>
 						<Route path="orders" element={<Orders/>}/>

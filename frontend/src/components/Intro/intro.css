@@ -4,6 +4,7 @@
 	min-height: 36rem;
 	height: auto;
 	position: relative;
+	margin-top: 3.2rem;
 }
 .text {
 	color: var(--text-color);

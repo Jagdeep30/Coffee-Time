@@ -23,7 +23,7 @@ app.use(session({secret:process.env.SESSION_SECRET}));
 
 let options = {
     "origin": "http://localhost:3000",
-    "methods": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "exposedHeaders":["set-cookie"],
     "credentials":true,
     "allowedHeaders": '*', // Specify allowed headers

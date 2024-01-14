@@ -82,13 +82,19 @@ const Store = (props) => {
 
 		let data = new FormData(e.target);
 		// console.log(data);
-		let info = {};
-			for(let entry of data.entries()){
-				info[entry[0]] = entry[1];
-			}
-
+		// let info = {};
+		// 	for(let entry of data.entries()){
+		// 		info[entry[0]] = entry[1];
+		// 	}
 
 		let img = await handleImageUpload(image);
+		data.append('storeImage',img.name);
+		console.log(data.get('storeImage'));
+
+		console.log(data);
+		let info = data;
+
+
 		// console.log("entered"+img);
 		info.storeImage = img.name;
 		if(props.task==='Add'){
@@ -142,7 +148,7 @@ const Store = (props) => {
 							<h3 className='admin-title'>{props.task} Store</h3>
 						</div>
 						{/* <form action={`http://localhost:5000/api/v1/admin/stores/${id}`} method="POST"  className='form-horizontal clearfix'> */}
-						<form onSubmit={handleFormSubmission} className='form-horizontal clearfix'>
+						<form onSubmit={handleFormSubmission} className='form-horizontal clearfix' encType='multipart/form-data'>
 						<div className="input-group">
 								<label htmlFor="firstname" className="form-label">Store Name:</label>
 								<div className='form-group'>

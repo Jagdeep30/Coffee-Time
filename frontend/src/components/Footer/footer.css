@@ -70,6 +70,7 @@
     margin-top: 1.5rem;
 }
 
+
 .info-card a{
     transition: all 500ms ;
 }
@@ -77,6 +78,11 @@
 .info-card a:hover{
     color: var(--bg-color);
     font-weight:bolder;
+    cursor: pointer;
+}
+
+.info-card li:hover{
+    cursor: pointer;
 }
 
 

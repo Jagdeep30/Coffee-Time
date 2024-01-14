@@ -24,7 +24,7 @@ const SignInForm = () => {
 		e.preventDefault();
 
 		let data = new FormData(e.target);
-		console.log(data);
+		// console.log(data);
 
 		let user = await axios.post('http://localhost:5000/api/v1/user/login',data);
 

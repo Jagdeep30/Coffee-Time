@@ -312,9 +312,9 @@ exports.getOrder = async (req, res,next) => {
 		next(err);
 	}
 };
-exports.getStore = async (req, res,next) => {
+exports.getStore = async (req,res,next) => {
 	try{
-		let result = await storeModel.findOne({_id:req.params.id});
+		let result = await storeModel.findOne({"_id":req.params.id});
 		res.status(200).json({
 			status:'success',
 			data:result
@@ -336,18 +336,7 @@ exports.getSupplier = async (req, res,next) => {
 		next(err);
 	}
 };
-exports.getUser = async (req, res,next) => {
-	try{
-		let result = await userModel.findOne({_id:req.params.id});
-		res.status(200).json({
-			status:'success',
-			data:result
-		});
 
-	}catch(err){
-		next(err);
-	}
-};
 exports.getVoucher = async (req, res,next) => {
 	try{
 		let result = await voucherModel.findOne({_id:req.params.id});
@@ -391,25 +380,36 @@ exports.getVoucherRed = async (req, res,next) => {
 		next(err);
 	}
 };
-// exports.getState = async(req,res,next) => {
-// 	try{
-// 		let result = await stateModel.findOne({'countryID':req.params.id});
-// 		res.status(200).json({
-// 			status:'success',
-// 			data:result
-// 		});
-// 	}catch(err){
-// 		next(err);
-// 	}
-// };
-// exports.getCity = async(req,res,next) => {
-// 	try{
-// 		let result = await cityModel.findOne({'stateID':req.params.id});
-// 		res.status(200).json({
-// 			status:'success',
-// 			data:result
-// 		});
-// 	}catch(err){
-// 		next(err);
-// 	}
-// };
+exports.getState = async(req,res,next) => {
+	try{
+		let result = await stateModel.findOne({'_id':req.params.id});
+		res.status(200).json({
+			status:'success',
+			data:result
+		});
+	}catch(err){
+		next(err);
+	}
+};
+exports.getCity = async(req,res,next) => {
+	try{
+		let result = await cityModel.findOne({'_id':req.params.id});
+		res.status(200).json({
+			status:'success',
+			data:result
+		});
+	}catch(err){
+		next(err);
+	}
+};
+exports.getCountry = async(req,res,next) => {
+	try{
+		let result = await countryModel.findOne({'_id':req.params.id});
+		res.status(200).json({
+			status:'success',
+			data:result
+		});
+	}catch(err){
+		next(err);
+	}
+};

@@ -1,11 +1,35 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import axios from 'axios';
 import './support.css';
 import { updateMail, updateName, updatePhone, updateQuery } from '../../state/action-creators';
 import { useDispatch } from 'react-redux';
+import emailjs from '@emailjs/browser';
 
 const SupportForm = ()=>{
 	const formRef = useRef();
-	const dispatch = useDispatch();
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [query, setQuery] = useState('');
+
+	const handleFormSubmission = ()=>{
+		emailjs.send('service_8ceqcpy', 'template_y91ll8q','p21Ad1fVDax1SkFNS', {name,email,mesaage:query})
+			.then((result) => {
+				console.log(result.text);
+			}, (error) => {
+				console.log(error.text);
+			});
+		};
+		// await axios.post('https://api.emailjs.com/api/v1.0/email/send',{
+		// 	service_id:"service_8ceqcpy",
+		// 	template_id:"template_y91ll8q",
+		// 	user_id:"p21Ad1fVDax1SkFNS",
+		// 	template_params:{
+		// 		name,
+		// 		email,
+		// 		message:query
+		// 	}
+		// })
+	
     return(
         <>
 			<span
@@ -42,9 +66,6 @@ const SupportForm = ()=>{
 									<div className='row'>
 										<div className=''>
 											<div className='form-container'>
-												<div className='form-icon'>
-													<i className='fa fa-user'></i>
-												</div>
 												<form className='form-horizontal clearfix' ref={formRef}>
 													<div className='form-group'>
 														<span className='input-icon'>
@@ -54,6 +75,8 @@ const SupportForm = ()=>{
 															type='text'
 															className='form-control'
 															placeholder='Name'
+															value={name}
+															onChange={(e)=>{setName(e.target.value)}}
 														/>
 													</div>
 													<div className='form-group'>
@@ -64,6 +87,8 @@ const SupportForm = ()=>{
 															type='email'
 															className='form-control'
 															placeholder='Email'
+															value={email}
+															onChange={(e)=>{setEmail(e.target.value)}}
 														/>
 													</div>
 													<div className='form-group'>
@@ -73,15 +98,10 @@ const SupportForm = ()=>{
 														<textarea
 															className='form-control'
 															placeholder='Query'
+															value={query}
+															onChange={(e)=>{setQuery(e.target.value)}}
 														></textarea>
 													</div>
-
-
-													
-
-
-													
-													
 												</form>
 											</div>
 										</div>
@@ -101,17 +121,10 @@ const SupportForm = ()=>{
 								type='button'
 								className='btn btn-confirm'
 								data-bs-dismiss='modal'
-                                onClick={()=>{
-                                    alert(`Query Sent! The support team will contact you soon!`)
-									// dispatch(updateName(formRef.current[0].value))
-									// dispatch(updatePhone(formRef.current[1].value))
-									// dispatch(updateMail(formRef.current[2].value))
-									// dispatch(updateQuery(formRef.current[3].value))
-									// formRef.current.reset()
-                                }}
+                                onClick={handleFormSubmission}
 
-								data-bs-toggle='modal'
-								data-bs-target='#exampleModal0'
+								// data-bs-toggle='modal'
+								// data-bs-target='#exampleModal0'
 							>
 								Confirm
 							</button>

@@ -1,6 +1,31 @@
+import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Voucher = () => {
+	const navigate = useNavigate();
+
+
+	const handleFormSubmission = async(e)=>{
+		e.preventDefault();
+		// console.log(e);
+
+		let data = new FormData(e.target);
+		// let info = {};
+		// 	for(let entry of data.entries()){
+		// 		info[entry[0]] = entry[1];
+		// 	}
+
+		let info = data;
+			
+		let res = await axios.post(`http://localhost:5000/api/v1/admin/vouchers`,info);
+		// console.log(res);
+		
+		
+		navigate('/admin/all/vouchers');
+
+		return;
+	}
 	return (
 		<div className='admin-sign-form'>
 			<div className='admin-form-bg'>
@@ -10,8 +35,8 @@ const Voucher = () => {
 							<h3 className='admin-title'>Add Voucher</h3>
 						</div>
 						<form
-							action='http://localhost:5000/api/v1/admin/vouchers'
-							method='POST'
+							onSubmit={handleFormSubmission}
+							encType="multipart/form-data"
 							className='form-horizontal clearfix'
 						>
 							<div className='input-group'>

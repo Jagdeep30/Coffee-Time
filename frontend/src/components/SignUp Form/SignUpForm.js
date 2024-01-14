@@ -45,11 +45,17 @@ const SignUpForm = (props) => {
 
 	const params = useParams();
 	const id = params.id;
+	const user = useSelector(state=>state.user);
+	const login = useSelector(state=>state.login);
 
 	let result;
 	const getData = async () => {
+		if(!login){
+			navigate('/signin');
+			return;
+		}
 		result = await axios.get(
-			`http://localhost:5000/api/v1/user/getUser?id=${id}`
+			`http://localhost:5000/api/v1/user/${user._id}`
 		);
 		setFirstName(result.data.data.firstName);
 		setLastName(result.data.data.lastName);
@@ -109,14 +115,34 @@ const SignUpForm = (props) => {
 
 	const handleFormSubmission = async(e)=>{
 		e.preventDefault();
-		let img = await handleImageUpload(image);
+		let img = '';
+		if(image!==undefined)img = await handleImageUpload(image);
 		let data = new FormData(e.target);
-		data.profileImage = img;
-		let res = await axios.post('http://localhost:5000/api/v1/user',data);
-		if(res.data.status==='success'){
-			dispatch(addUserData(res.data.data));
-			dispatch(loggedIn(true));
+		if(image!==undefined)data.append('profileImage',img.name);
+		// let info = {};
+		// for(let entry of data.entries()){
+		// 	info[entry[0]] = entry[1];
+		// }
+		// info.profileImage = img.name;
+		
+		// console.log(data.get('profileImage'));
+
+		// console.log(data);
+		let info = data;
+		if(props.task==='Add'){
+			let res = await axios.post(`http://localhost:5000/api/v1/user`,info);
+			if(res.data.status==='success'){
+				dispatch(addUserData(res.data.data));
+				dispatch(loggedIn(true));
+			}
 		}
+		else if(props.task==='Update'){
+			let res = await axios.put(`http://localhost:5000/api/v1/user/${user._id}`,info);
+
+		}
+
+
+		// console.log(info);
 
 		navigate('/');
 	}
@@ -168,6 +194,12 @@ const SignUpForm = (props) => {
 		}
 	},[]);
 
+	useEffect(()=>{
+		if(props.task==='Update'){
+			getData();
+		}
+	},[props.task])
+
 	
 	return (
 		<div className='sign-form'>
@@ -177,7 +209,7 @@ const SignUpForm = (props) => {
 						<div className='col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3'>
 							<div className='form-container'>
 							<img src={updatedLogo} alt="Logo" className="formLogo logo"/>
-								<h3 className='title'>Sign up</h3>
+								<h3 className='title'>{props.task==="Add"?"Sign Up":"Update Profile"}</h3>
 								<form
 									className='form-horizontal clearfix'
 									onSubmit={handleFormSubmission}
@@ -427,7 +459,7 @@ const SignUpForm = (props) => {
 											</select>
 										</div>
 									</div>
-									<div className='input-group'>
+									{props.task==='Add' && <div className='input-group'>
 										<label
 											htmlFor='password'
 											className='form-label'
@@ -448,8 +480,8 @@ const SignUpForm = (props) => {
 											/>
 											<span id="eye" className="form-icon" onClick={handleShowPassword}><i className={`fa-regular fa-eye${showPassword?'-slash':''}`}></i></span>
 										</div>
-									</div>
-									<div className='input-group'>
+									</div>}
+									{props.task==='Add' && <div className='input-group'>
 										<label
 											htmlFor='passwordC'
 											className='form-label'
@@ -471,14 +503,14 @@ const SignUpForm = (props) => {
 											<span id="eye" className="form-icon" onClick={handleShowPasswordC}><i className={`fa-regular fa-eye${showPasswordC?'-slash':''}`}></i></span>
 										</div>
 										{passwordC!==password && <span className="validation">Password does not match!</span>}
-									</div>
+									</div>}
 									
 									<button
 										type='submit'
 										className='btn btn-default'
 										disabled={password!==passwordC}
 									>
-										Sign Up
+										{props.task==="Add"?"Sign Up":"Update"}
 									</button>
 								</form>
 							</div>

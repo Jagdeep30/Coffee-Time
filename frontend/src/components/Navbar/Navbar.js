@@ -7,14 +7,21 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import downloadImage from "../../DownloadImage";
 
 const Navbar = (props) => {
+	const user = useSelector(state=>state.user);
 	const cartSize = useSelector(state => state.cartSize);
 	const login = useSelector(state => state.login);
-
+	const [image, setImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE26NjQaonqTRt7BXD_87Iuukitk_kcGBv3w&usqp=CAU");
+	
+	const getImage = async()=>{
+		let img = login?await downloadImage(user.profileImage):image;
+		setImage(img);
+	}
 	useEffect(()=>{
-		console.log('working'+login);
-	},[login])
+		getImage();
+	},[user])
 	return (
 		<nav className='navbar navbar-expand-lg navbar-dark'>
 			<div className='container-fluid d-flex flex-row-reverse justify-content-between ps-3 pe-4 mt-2'>
@@ -30,10 +37,11 @@ const Navbar = (props) => {
 					<span className='navbar-toggler-icon'></span>
 				</button>
 				
-				
+				<Link to='/dashboard/updateProfile'>
 				<div className="myprofile">
-					<img src={props.profileImg} alt="Me" className='profileImg'/>
+					<img src={image} alt="Me" className='profileImg'/>
 				</div>
+				</Link>
 
 
 				{!login && <Link to='/signin' className="signin montserrat item">Login/SignUp</Link>}

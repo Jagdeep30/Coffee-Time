@@ -3,6 +3,7 @@
     background: repeating-linear-gradient(-45deg,#111, #111 4px, #2a2314 4px, #2a2314 8px);
     padding: 40px 25px;
     border-top: 6px solid var(--primary-color);
+    margin-bottom: 10rem;
 }
 .form-container .title{
     color: #fff;

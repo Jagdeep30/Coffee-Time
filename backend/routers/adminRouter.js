@@ -1,6 +1,6 @@
 const express = require("express");
 const { addvoucher, addEmp, addjob, addproduct, additem, additemstock, addstore, addsupplier, updateProduct, updateEmployee, updateJob, updateItem, updateItemStock, updateStore, updateSupplier, addOrderDetails, addOrder, deleteProduct, deleteEmployee, deleteItem, deleteItemStock, deleteJob, deleteOrderDetails, deleteOrder, deleteStore, deleteSupplier, deleteVoucher, addVoucherRed } = require("../controllers/adminController");
-const { getAllCountries, getAllStates, getAllCities, getAllProducts, getProduct, getAllEmployees, getAllItems, getAllItemStocks, getAllJobs, getAllOrderDetails, getAllOrders, getAllStores, getAllSuppliers, getAllUsers, getAllVouchers, getAllVoucherReds, getEmployees, getEmployee, getItem, getItemStock, getJob, getOrderDetail, getOrder, getStore, getSupplier, getUser, getVoucher, getVoucherRed, getState, getCity, getVoucherFromCode } = require("../controllers/getterController.js");
+const { getAllCountries, getAllStates, getAllCities, getAllProducts, getProduct, getAllEmployees, getAllItems, getAllItemStocks, getAllJobs, getAllOrderDetails, getAllOrders, getAllStores, getAllSuppliers, getAllUsers, getAllVouchers, getAllVoucherReds, getEmployees, getEmployee, getItem, getItemStock, getJob, getOrderDetail, getOrder, getStore, getSupplier, getUser, getVoucher, getVoucherRed, getState, getCity, getVoucherFromCode,getCountry } = require("../controllers/getterController.js");
 const verifyReq = require("../middlewares/verifyMiddleware.js");
 
 
@@ -9,6 +9,11 @@ const router = express.Router();
 
 router.route("/states/:id").get(verifyReq,getAllStates); // to get all states according to countryID
 router.route("/cities/:id").get(verifyReq,getAllCities); // to get all cities according to stateID
+
+
+router.route("/city/:id").get(verifyReq,getCity); // to get all cities according to stateID
+router.route("/state/:id").get(verifyReq,getState); // to get all cities according to stateID
+router.route("/country/:id").get(verifyReq,getCountry); // to get all cities according to stateID
 
 router.route("/countries").get(verifyReq,getAllCountries);
 router.route('/products').get(getAllProducts).post(verifyReq,addproduct);

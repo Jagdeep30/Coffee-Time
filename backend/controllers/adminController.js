@@ -140,6 +140,7 @@ exports.addjob = async (req,res,next)=>{
 exports.addproduct = async (req,res,next)=>{
 	try{
 		let data = {...req.body};
+		console.log(data);
 		let result = await productModel.create(data);
 		res.status(200).json({
 			status:'success',
@@ -209,7 +210,7 @@ exports.addsupplier = async (req,res,next)=>{
 }
 exports.addOrder = async(req,res,next)=>{
 	try{
-		let data = req.body;
+		console.log("reached");
 		let result = await ordersModel.create(req.body);
 		res.status(200).json({
 			status:'success',
@@ -235,7 +236,7 @@ exports.addOrderDetails = async(req,res,next)=>{
 //controllers for updating the value in a document based on its _id
 exports.updateProduct = async(req,res,next)=>{
 	try{
-		await productModel.findByIdAndUpdate(req.query.id,req.body);
+		await productModel.findByIdAndUpdate(req.params.id,req.body);
 		res.status(200).json({
 			status:'success',
 			message:"Updated Successfully"
@@ -260,7 +261,7 @@ exports.updateEmployee = async(req,res,next)=>{
 }
 exports.updateJob = async(req,res,next)=>{
 	try{
-		await jobModel.findByIdAndUpdate(req.query.id,req.body);
+		await jobModel.findByIdAndUpdate(req.params.id,req.body);
 		res.status(200).json({
 			status:'success',
 			message:"Updated Successfully"
@@ -273,7 +274,7 @@ exports.updateJob = async(req,res,next)=>{
 }
 exports.updateItem = async(req,res,next)=>{
 	try{
-		await itemModel.findByIdAndUpdate(req.query.id,req.body);
+		await itemModel.findByIdAndUpdate(req.params.id,req.body);
 		res.status(200).json({
 			status:'success',
 			message:"Updated Successfully"
@@ -287,7 +288,7 @@ exports.updateItem = async(req,res,next)=>{
 exports.updateItemStock = async(req,res,next)=>{
 	try{
 
-		await itemstockModel.findByIdAndUpdate(req.query.id,req.body);
+		await itemstockModel.findByIdAndUpdate(req.params.id,req.body);
 		res.status(200).json({
 			status:'success',
 			message:"Updated Successfully"
@@ -299,11 +300,11 @@ exports.updateItemStock = async(req,res,next)=>{
 }
 exports.updateStore = async(req,res,next)=>{
 	try{
+		await storeModel.findByIdAndUpdate(req.params.id,req.body);
 		res.status(200).json({
 			status:'success',
 			message:"Updated Successfully"
 		})
-		await storeModel.findByIdAndUpdate(req.query.id,req.body);
 		// res.redirect('http://localhost:3000/admin/storeForm');
 
 	}catch(err){
@@ -312,7 +313,7 @@ exports.updateStore = async(req,res,next)=>{
 }
 exports.updateSupplier = async(req,res,next)=>{
 	try{
-		await supplierModel.findByIdAndUpdate(req.query.id,req.body);
+		await supplierModel.findByIdAndUpdate(req.params.id,req.body);
 		res.status(200).json({
 			status:'success',
 			message:"Updated Successfully"
