@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const Supplier = (props) => {
 	const [states, setStates] = useState([]);
 	const [countries, setCountries] = useState([]);
@@ -36,7 +38,7 @@ const Supplier = (props) => {
 	  };
 
 	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/admin/suppliers/${id}`);
+		result = await axios.get(baseURL+`/admin/suppliers/${id}`);
 
 		setSupplierName(result.data.data.supplierName);
 		setPhone(result.data.data.phone);
@@ -75,21 +77,21 @@ const Supplier = (props) => {
 	}
 	
 	const getCountries = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/admin/countries');
+		let c = await axios.get(baseURL+'/admin/countries');
 		// console.log(c.data);
 		setCountries(c.data.data);
 	}
 	const getStates = async(value)=>{
 		// console.log(value);
 		if(!value)return;
-		let d = await axios.get(`http://localhost:5000/api/v1/admin/states/${value}`);
+		let d = await axios.get(baseURL+`/admin/states/${value}`);
 		// console.log(d);
 		setStates(d.data.data);
 	}
 	const getCities = async(value)=>{
 		// console.log(value);
 		if(value==='state')return;
-		let d = await axios.get(`http://localhost:5000/api/v1/admin/cities/${value}`);
+		let d = await axios.get(baseURL+`/admin/cities/${value}`);
 		// console.log(d);
 		setCities(d.data.data);
 	}
@@ -108,7 +110,7 @@ const Supplier = (props) => {
 
 		if(props.task==='Add'){
 			
-			let res = await axios.post(`http://localhost:5000/api/v1/admin/suppliers`,info);
+			let res = await axios.post(baseURL+`/admin/suppliers`,info);
 			// console.log(res);
 		}
 		else if(props.task==='Update'){
@@ -118,7 +120,7 @@ const Supplier = (props) => {
 			// let res = axiosBackend.put(`/employees/${id}`,info);
 			let res = await axios({
 				method: 'put',
-				url: `http://localhost:5000/api/v1/admin/suppliers/${id}`,
+				url: baseURL+`/admin/suppliers/${id}`,
 				data: info
 			});
 			// console.log(res);

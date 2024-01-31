@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 
 const Employee = (props) => {
 	const [states, setStates] = useState([]);
@@ -51,7 +53,7 @@ const Employee = (props) => {
 	  };
 
 	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/admin/employees/${id}`);
+		result = await axios.get(baseURL+`/admin/employees/${id}`);
 		// console.log(result.data.status);
 		if(result.data.status === 'fail'){
 			navigate('/signin')
@@ -116,7 +118,7 @@ const Employee = (props) => {
 
 
 	// const axiosBackend = axios.create({
-	// 	baseURL: 'http://localhost:5000/api/v1/admin',
+	// 	baseURL: /'baseURL+`/admin',
 	//   });
 	  
 	const handleFormSubmission = async(e)=>{
@@ -133,7 +135,7 @@ const Employee = (props) => {
 
 		if(props.task==='Add'){
 			
-			let res = await axios.post(`http://localhost:5000/api/v1/admin/employees`,info);
+			let res = await axios.post(baseURL+`/admin/employees`,info);
 			// console.log(res);
 		}
 		else if(props.task==='Update'){
@@ -143,7 +145,7 @@ const Employee = (props) => {
 			// let res = axiosBackend.put(`/employees/${id}`,info);
 			let res = await axios({
 				method: 'put',
-				url: `http://localhost:5000/api/v1/admin/employees/${id}`,
+				url: baseURL+`/admin/employees/${id}`,
 				data: info
 			});
 			// console.log(res);
@@ -154,36 +156,36 @@ const Employee = (props) => {
 	}
 	
 	const getCountries = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/admin/countries');
+		let c = await axios.get(baseURL+`/admin/countries`);
 		// console.log(c.data);
 		setCountries(c.data.data);
 	}
 	const getStates = async(value)=>{
 		// console.log(value);
 		if(!value)return;
-		let d = await axios.get(`http://localhost:5000/api/v1/admin/states/${value}`);
+		let d = await axios.get(baseURL+`/admin/states/${value}`);
 		// console.log(d);
 		setStates(d.data.data);
 	}
 	// const getStates = async(value)=>{
 	// 	// console.log(value);
-	// 	let d = await axios.get(`http://localhost:5000/api/v1/getter/getStates?countryID=${value.target.value}`);
+	// 	let d = await axios.get(baseURL+`/getter/getStates?countryID=${value.target.value}`);
 	// 	// console.log(d);
 	// 	setStates(d.data);
 	// }
 	const getCities = async(value)=>{
 		// console.log(value);
 		if(value==='state')return;
-		let d = await axios.get(`http://localhost:5000/api/v1/admin/cities/${value}`);
+		let d = await axios.get(baseURL+`/admin/cities/${value}`);
 		// console.log(d);
 		setCities(d.data.data);
 	}
 	const getJobs = async(value)=>{
-		let d = await axios.get(`http://localhost:5000/api/v1/admin/jobs`);
+		let d = await axios.get(baseURL+`/admin/jobs`);
 		setJobs(d.data.data);
 	}
 	const getStores = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/admin/stores');
+		let c = await axios.get(baseURL+`/admin/stores`);
 		// console.log(c.data);
 		setStores(c.data.data);
 	}

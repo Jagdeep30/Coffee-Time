@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import handleImageUpload from '../../UploadImage';
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const Store = (props) => {
 	const navigate = useNavigate();
 	const [storeName, setStoreName] = useState('');
@@ -31,7 +33,7 @@ const Store = (props) => {
 	  };
 
 	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/admin/stores/${id}`);
+		result = await axios.get(baseURL+`/admin/stores/${id}`);
 
 		setStoreName(result.data.data.storeName);
 		setCountryID(result.data.data.countryID);
@@ -54,21 +56,21 @@ const Store = (props) => {
 
 
 	const getCountries = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/admin/countries');
+		let c = await axios.get(baseURL+'admin/countries');
 		// console.log(c.data);
 		setCountries(c.data.data);
 	}
 	const getStates = async(value)=>{
 		// console.log(value);
 		if(!value)return;
-		let d = await axios.get(`http://localhost:5000/api/v1/admin/states/${value}`);
+		let d = await axios.get(baseURL+`/admin/states/${value}`);
 		// console.log(d);
 		setStates(d.data.data);
 	}
 	const getCities = async(value)=>{
 		// console.log(value);
 		if(value==='state')return;
-		let d = await axios.get(`http://localhost:5000/api/v1/admin/cities/${value}`);
+		let d = await axios.get(baseURL+`/admin/cities/${value}`);
 		// console.log(d);
 		setCities(d.data.data);
 	}
@@ -99,17 +101,17 @@ const Store = (props) => {
 		info.storeImage = img.name;
 		if(props.task==='Add'){
 			
-			let res = await axios.post(`http://localhost:5000/api/v1/admin/stores`,info);
+			let res = await axios.post(baseURL+`/admin/stores`,info);
 			// console.log(res);
 		}
 		else if(props.task==='Update'){
 			// console.log(info);
 			
 			// let res = await axios.patch(`/api/v1/admin/employees/${id}`,info);
-			let res = await axios.put(`http://localhost:5000/api/v1/admin/stores/${id}`,info);
+			let res = await axios.put(baseURL+`/admin/stores/${id}`,info);
 			// let res = await axios({
 			// 	method: 'put',
-			// 	url: `http://localhost:5000/api/v1/admin/employees/${id}`,
+			// 	url: baseURL+`/admin/employees/${id}`,
 			// 	data: info
 			// });
 			// console.log(res);
@@ -147,7 +149,7 @@ const Store = (props) => {
 						<div className='admin-formHead'>
 							<h3 className='admin-title'>{props.task} Store</h3>
 						</div>
-						{/* <form action={`http://localhost:5000/api/v1/admin/stores/${id}`} method="POST"  className='form-horizontal clearfix'> */}
+						{/* <form action={baseURL+`/admin/stores/${id}`} method="POST"  className='form-horizontal clearfix'> */}
 						<form onSubmit={handleFormSubmission} className='form-horizontal clearfix' encType='multipart/form-data'>
 						<div className="input-group">
 								<label htmlFor="firstname" className="form-label">Store Name:</label>

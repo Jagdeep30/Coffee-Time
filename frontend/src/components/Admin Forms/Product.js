@@ -4,6 +4,8 @@ import axios from "axios";
 import PropTypes from 'prop-types';
 import handleImageUpload from "../../UploadImage";
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const Product = (props) => {
 	// const [data, setData] = useState({});
 	const navigate = useNavigate();
@@ -22,7 +24,7 @@ const Product = (props) => {
 	  };
 
 	const getData = async()=>{
-		let result = await axios.get(`http://localhost:5000/api/v1/admin/products/${id}`);
+		let result = await axios.get(baseURL+`/admin/products/${id}`);
 		// setData(result.data);
 		setName(result.data.data.name);
 		setUnitPrice(result.data.data.unitPrice);
@@ -64,17 +66,17 @@ const Product = (props) => {
 		// info.productImage = img.name;
 		if(props.task==='Add'){
 			
-			let res = await axios.post(`http://localhost:5000/api/v1/admin/products`,info);
+			let res = await axios.post(baseURL+`/admin/products`,info);
 			// console.log(res);
 		}
 		else if(props.task==='Update'){
 			// console.log(info);
 			
 			// let res = await axios.patch(`/api/v1/admin/employees/${id}`,info);
-			let res = await axios.put(`http://localhost:5000/api/v1/admin/products/${id}`,info);
+			let res = await axios.put(baseURL+`/admin/products/${id}`,info);
 			// let res = await axios({
 			// 	method: 'put',
-			// 	url: `http://localhost:5000/api/v1/admin/employees/${id}`,
+			// 	url: baseURL+`/admin/employees/${id}`,
 			// 	data: info
 			// });
 			// console.log(res);

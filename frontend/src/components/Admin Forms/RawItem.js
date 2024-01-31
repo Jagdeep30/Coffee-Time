@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const RawItem = (props) => {
 	const [itemName, setItemName] = useState('');
 
@@ -16,7 +18,7 @@ const RawItem = (props) => {
 	  };
 
 	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/admin/items/${id}`);
+		result = await axios.get(baseURL+`/admin/items/${id}`);
 
 		setItemName(result.data.data.rName);
 	}
@@ -41,7 +43,7 @@ const RawItem = (props) => {
 
 		if(props.task==='Add'){
 			
-			let res = await axios.post(`http://localhost:5000/api/v1/admin/items`,info);
+			let res = await axios.post(baseURL+`/admin/items`,info);
 			// console.log(res);
 		}
 		else if(props.task==='Update'){
@@ -51,7 +53,7 @@ const RawItem = (props) => {
 			// let res = axiosBackend.put(`/employees/${id}`,info);
 			let res = await axios({
 				method: 'put',
-				url: `http://localhost:5000/api/v1/admin/items/${id}`,
+				url: baseURL+`/admin/items/${id}`,
 				data: info
 			});
 			// console.log(res);

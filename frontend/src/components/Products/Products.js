@@ -6,12 +6,14 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../state/action-creators';
 import downloadImage from '../../DownloadImage';
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const Products = () => {
     const [products,setProducts] = useState([]);
     const dispatch = useDispatch();
 
     const getProducts = async()=>{
-        const result = await axios.get("http://localhost:5000/api/v1/admin/products");
+        const result = await axios.get(baseURL+"/admin/products");
 
         const productWithImages = await Promise.all(
 			result.data.data.map(async (val) => {

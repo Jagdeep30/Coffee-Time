@@ -2,6 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const Voucher = () => {
 	const navigate = useNavigate();
 
@@ -18,7 +20,7 @@ const Voucher = () => {
 
 		let info = data;
 			
-		let res = await axios.post(`http://localhost:5000/api/v1/admin/vouchers`,info);
+		let res = await axios.post(baseURL+`/admin/vouchers`,info);
 		// console.log(res);
 		
 		

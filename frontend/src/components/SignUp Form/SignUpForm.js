@@ -18,6 +18,8 @@ import updatedLogo from './../../assets/updatedLogo.png';
 import { addUserData, loggedIn } from "../../state/action-creators";
 import handleImageUpload from "../../UploadImage";
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const SignUpForm = (props) => {
 
 	const navigate = useNavigate();
@@ -55,7 +57,7 @@ const SignUpForm = (props) => {
 			return;
 		}
 		result = await axios.get(
-			`http://localhost:5000/api/v1/user/${user._id}`
+			baseURL+`/user/${user._id}`
 		);
 		setFirstName(result.data.data.firstName);
 		setLastName(result.data.data.lastName);
@@ -130,14 +132,14 @@ const SignUpForm = (props) => {
 		// console.log(data);
 		let info = data;
 		if(props.task==='Add'){
-			let res = await axios.post(`http://localhost:5000/api/v1/user`,info);
+			let res = await axios.post(baseURL+`/user`,info);
 			if(res.data.status==='success'){
 				dispatch(addUserData(res.data.data));
 				dispatch(loggedIn(true));
 			}
 		}
 		else if(props.task==='Update'){
-			let res = await axios.put(`http://localhost:5000/api/v1/user/${user._id}`,info);
+			let res = await axios.put(baseURL+`/user/${user._id}`,info);
 
 		}
 
@@ -149,7 +151,7 @@ const SignUpForm = (props) => {
 
 	const getCountries = async () => {
 		let c = await axios.get(
-			"http://localhost:5000/api/v1/admin/countries"
+			baseURL+"/admin/countries"
 		);
 		// console.log(c.data);
 		setCountries(c.data.data);
@@ -158,7 +160,7 @@ const SignUpForm = (props) => {
 		// console.log(value);
 		if(!value)return;
 		let d = await axios.get(
-			`http://localhost:5000/api/v1/admin/states/${value}`
+			baseURL+`/admin/states/${value}`
 		);
 		// console.log(d);
 		setStates(d.data.data);
@@ -167,7 +169,7 @@ const SignUpForm = (props) => {
 		// console.log(value);
 		if(state==='state')return;
 		let d = await axios.get(
-			`http://localhost:5000/api/v1/admin/cities/${state}`
+			baseURL+`/admin/cities/${state}`
 		);
 		// console.log(d);
 		setCities(d.data.data);

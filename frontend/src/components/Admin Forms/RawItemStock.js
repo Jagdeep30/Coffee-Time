@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const RawItemStock = (props) => {
 	const [price, setPrice] = useState('');
 	const [quantity, setQuantity] = useState('');
@@ -13,17 +15,17 @@ const RawItemStock = (props) => {
 	const [itemName, setItemName] = useState('');
 	const [supplierID, setSupplierID] = useState('');
 	const getItems = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/admin/items');
+		let c = await axios.get(baseURL+`/admin/items`);
 		// console.log(c.data);
 		setItems(c.data.data);
 	}
 	const getSuppliers = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/admin/suppliers');
+		let c = await axios.get(baseURL+`/admin/suppliers`);
 		// console.log(c.data);
 		setSuppliers(c.data.data);
 	}
 	const getStores = async()=>{
-		let c = await axios.get('http://localhost:5000/api/v1/admin/stores');
+		let c = await axios.get(baseURL+`/admin/stores`);
 		// console.log(c.data);
 		setStores(c.data.data);
 	}
@@ -44,7 +46,7 @@ const RawItemStock = (props) => {
 	  };
 
 	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/admin/itemStocks/${id}`);
+		result = await axios.get(baseURL+`/admin/itemStocks/${id}`);
 
 		setPrice(result.data.data.price);
 		setQuantity(result.data.data.quantity);
@@ -66,7 +68,7 @@ const RawItemStock = (props) => {
 		let info = data;
 		if(props.task==='Add'){
 			
-			let res = await axios.post(`http://localhost:5000/api/v1/admin/itemStocks`,info);
+			let res = await axios.post(baseURL+`/admin/itemStocks`,info);
 			// console.log(res);
 		}
 		else if(props.task==='Update'){
@@ -76,7 +78,7 @@ const RawItemStock = (props) => {
 			// let res = axiosBackend.put(`/employees/${id}`,info);
 			let res = await axios({
 				method: 'put',
-				url: `http://localhost:5000/api/v1/admin/itemStocks/${id}`,
+				url: baseURL+`/admin/itemStocks/${id}`,
 				data: info
 			});
 			// console.log(res);

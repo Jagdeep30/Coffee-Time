@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+const baseURL = "http://localhost:5000/api/v1/";
+
 const Job = (props) => {
 	const [jobName, setJobName] = useState('');
 	const [salary, setSalary] = useState('');
@@ -19,7 +21,7 @@ const Job = (props) => {
 	  };
 
 	const getData = async()=>{
-		result = await axios.get(`http://localhost:5000/api/v1/admin/jobs/${id}`);
+		result = await axios.get(baseURL+`/admin/jobs/${id}`);
 
 		setJobName(result.data.data.jobName);
 		setSalary(result.data.data.salary);
@@ -49,7 +51,7 @@ const Job = (props) => {
 
 		if(props.task==='Add'){
 			
-			let res = await axios.post(`http://localhost:5000/api/v1/admin/jobs`,info);
+			let res = await axios.post(baseURL+`/admin/jobs`,info);
 			// console.log(res);
 		}
 		else if(props.task==='Update'){
@@ -59,7 +61,7 @@ const Job = (props) => {
 			// let res = axiosBackend.put(`/employees/${id}`,info);
 			let res = await axios({
 				method: 'put',
-				url: `http://localhost:5000/api/v1/admin/jobs/${id}`,
+				url: baseURL+`/admin/jobs/${id}`,
 				data: info
 			});
 			// console.log(res);

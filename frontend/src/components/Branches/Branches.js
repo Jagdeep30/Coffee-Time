@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import downloadImage from "../../DownloadImage";
 
-
+const baseURL = 'http://localhost:5000/api/v1/';
 
 
 
@@ -19,7 +19,7 @@ const Branches = () => {
 	const [branch,setBranch] = useState([]);
 
 	const getData = async()=>{
-		let result = await axios.get('http://localhost:5000/api/v1/admin/stores');
+		let result = await axios.get(baseURL+'/admin/stores');
 		const branchWithImages = await Promise.all(
 			result.data.data.map(async (val) => {
 			  let url = await downloadImage(val.storeImage);

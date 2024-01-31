@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import updatedLogo from './../../assets/updatedLogo.png';
 import { addUserData, loggedIn } from "../../state/action-creators";
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 axios.defaults.withCredentials = true;
 const SignInForm = () => {
 
@@ -26,7 +28,7 @@ const SignInForm = () => {
 		let data = new FormData(e.target);
 		// console.log(data);
 
-		let user = await axios.post('http://localhost:5000/api/v1/user/login',data);
+		let user = await axios.post(baseURL+'/user/login',data);
 
 		if(user.data.status==='success'){
 			// console.log('success');

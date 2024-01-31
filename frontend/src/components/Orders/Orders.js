@@ -6,6 +6,8 @@ import { addToCart, deleteFromCart } from '../../state/action-creators';
 import downloadImage from '../../DownloadImage';
 import { useNavigate } from 'react-router-dom';
 
+const baseURL = 'http://localhost:5000/api/v1/';
+
 const Orders = () => {
   const dispatch = useDispatch();
   const items = useSelector(state=>state.cart);
@@ -28,7 +30,7 @@ const Orders = () => {
 
   const getData = async()=>{
     // items.forEach(async(val,key)=>{
-    //   let res = await axios.get(`http://localhost:5000/api/v1/admin/products/${key}`);
+    //   let res = await axios.get(baseURL+`/admin/products/${key}`);
     //   dataItems.push(res.data.data);
     // })
     
@@ -37,7 +39,7 @@ const Orders = () => {
     let images = [];
     let price = 0;
     for(const val of items.entries()){
-      let res = await axios.get(`http://localhost:5000/api/v1/admin/products/${val[0]}`);
+      let res = await axios.get(baseURL+`/admin/products/${val[0]}`);
       let image = await downloadImage(res.data.data.productImage);
       
       valCount.push(val[1]);
@@ -73,7 +75,7 @@ const Orders = () => {
   }
 
   // const getVoucher = async(code)=>{
-  //   let result = await axios.get(`http://localhost:5000/api/v1/admin/vouchers/code/${code}`);
+  //   let result = await axios.get(baseURL+`/admin/vouchers/code/${code}`);
   //   return result;
   // }
 
@@ -93,7 +95,7 @@ const Orders = () => {
     let redempData = new FormData();
 
     if(voucher && voucherCode){
-        let voucherResult = await axios.get(`http://localhost:5000/api/v1/admin/vouchers/code/${voucherCode}`);
+        let voucherResult = await axios.get(baseURL+`/admin/vouchers/code/${voucherCode}`);
         // let voucherResult = getVoucher(voucherCode);
         // console.log(voucherResult.data.data);
         // let vouc = voucherResult.data.data;
@@ -119,10 +121,10 @@ const Orders = () => {
         // }
       
         // console.log("----------------------------------------------------------------------------");
-        // await axios.post('http://localhost:5000/api/v1/admin/voucherReds',redempData);
+        // await axios.post(baseURL+'/admin/voucherReds',redempData);
     }
     // console.log(voucher);
-    let res = await axios.post('http://localhost:5000/api/v1/admin/orders',reqData);
+    let res = await axios.post(baseURL+'/admin/orders',reqData);
 
     for( let item of items.entries()){
       let itemData = new FormData();
@@ -134,14 +136,14 @@ const Orders = () => {
       //   orderID:res.data.data._id,
       //   productID:item[0]
       // }
-      await axios.post('http://localhost:5000/api/v1/admin/orderDetails',itemData)
+      await axios.post(baseURL+'/admin/orderDetails',itemData)
     }
     
 
     if(voucher && voucherCode){
       redempData.append("orderID",res.data.data._id);
       // console.log("----------------------------------------------------------------------------");
-      await axios.post('http://localhost:5000/api/v1/admin/voucherReds',redempData);
+      await axios.post(baseURL+'/admin/voucherReds',redempData);
     }
 
 
