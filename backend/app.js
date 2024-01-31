@@ -22,7 +22,8 @@ app.use(cookieParser());
 app.use(session({secret:process.env.SESSION_SECRET}));
 
 let options = {
-    "origin": "http://localhost:3000",
+    // "origin": "http://localhost:3000",
+    "origin": "*",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "exposedHeaders":["set-cookie"],
     "credentials":true,
