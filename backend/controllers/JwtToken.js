@@ -9,7 +9,7 @@ exports.createToken = (data,res,message,statusCode=200)=>{
         httpOnly:true,
         maxAge:10*60*60*1000,
         sameSite:'none',
-        secure:false
+        secure:true
     }).json({
         status:'success',
         message,
