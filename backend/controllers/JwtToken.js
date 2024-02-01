@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 exports.createToken = (data,res,message,statusCode=200)=>{
     const token = jwt.sign({_id:data._id},process.env.JWT_SECRET);
 
-    
+    req.session.currUser = data;
+    console.log("user is -------------->>>>>>>>>>>>>>"+req.session.currUser);
 
     res.status(statusCode).cookie('token',token,{
         httpOnly:true,
