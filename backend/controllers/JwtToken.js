@@ -8,7 +8,7 @@ exports.createToken = (data,res,message,statusCode=200)=>{
     res.status(statusCode).cookie('token',token,{
         httpOnly:true,
         maxAge:10*60*60*1000,
-        // sameSite:'none',
+        sameSite:'none',
         // secure:false
     }).json({
         status:'success',
