@@ -31,7 +31,7 @@ const SignInForm = () => {
 		let user = await axios.post(baseURL+'/user/login',data);
 
 		if(user.data.status==='success'){
-			console.log('success');
+			console.log(user.data.data);
 			dispatch(addUserData(user.data.data));
 			dispatch(loggedIn(true));
 			user.data.data.role==='admin'?navigate('/admin'):navigate('/');
