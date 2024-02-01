@@ -89,7 +89,7 @@ app.use('/api/v1/getter',getterRouter);
 // const express = require("express");
 const dotenv = require("dotenv");
 
-const dbcon = require("./dbconnect.js");
+// const dbcon = require("./dbconnect.js");
 // const app = require("./app.js");
 
 dotenv.config({ path: "./.env" });
