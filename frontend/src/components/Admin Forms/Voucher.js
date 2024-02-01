@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1';
 
 const Voucher = () => {
 	const navigate = useNavigate();

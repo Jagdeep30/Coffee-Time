@@ -4,7 +4,7 @@ import axios from "axios";
 import PropTypes from 'prop-types';
 import handleImageUpload from "../../UploadImage";
 
-const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1';
 
 const Product = (props) => {
 	// const [data, setData] = useState({});

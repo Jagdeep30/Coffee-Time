@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import downloadImage from "../../DownloadImage";
 
-const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1';
 
 
 

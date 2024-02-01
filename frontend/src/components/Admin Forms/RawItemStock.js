@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 
-const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1';
 
 const RawItemStock = (props) => {
 	const [price, setPrice] = useState('');

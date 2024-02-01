@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import updatedLogo from './../../assets/updatedLogo.png';
 import { addUserData, loggedIn } from "../../state/action-creators";
 
-const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1';
 
 axios.defaults.withCredentials = true;
 const SignInForm = () => {
