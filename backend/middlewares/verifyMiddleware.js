@@ -12,7 +12,7 @@ const verifyReq = (req,res,next)=>{
         if(user===undefined || !cookie.token){
             res.status(200).json({
                 status:'fail',
-                message:`Login first to access data ---> token is ${cookie.token}`
+                message:`Login first to access data ---> token is ${user}`
             })
             // res.redirect("http://localhost:3000/signin");
             // console.log("CONGRATS YOUR USER IS UNDEFINED");
