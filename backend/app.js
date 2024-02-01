@@ -25,15 +25,10 @@ app.use(cookieParser());
 app.use(
 	session({
 		secret: process.env.SESSION_SECRET,
-		// store: new RedisStore({
-		// 	host: "redis-18637.c325.us-east-1-4.ec2.cloud.redislabs.com", // Replace with your Redis host
-		// 	port: 18637, // Replace with your Redis port
-		// 	password: "OGpImOqXkfAe766wqmL4TMRLChV4TYph", // Replace with your Redis password (if applicable)
-		// }),
 		resave: false,
 		saveUninitialized: true,
     cookie: {
-      secure: process.env.NODE_ENV === 'production', // Set to true in production
+      secure: true, // Set to true in production
       sameSite: 'none', // Adjust as needed
     },
 	})
