@@ -39,7 +39,7 @@ exports.login = async(req,res,next)=>{
 
         // req.session.currUser = user;
         req.session.currUser = user;
-        // console.log(req.session.currUser);
+        console.log(req.session.currUser);
 
         createToken(user,res,"Login Successful",200);
     }catch(err){
