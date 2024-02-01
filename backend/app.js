@@ -30,8 +30,8 @@ app.use(
 		// 	port: 18637, // Replace with your Redis port
 		// 	password: "OGpImOqXkfAe766wqmL4TMRLChV4TYph", // Replace with your Redis password (if applicable)
 		// }),
-		// resave: false,
-		// saveUninitialized: true,
+		resave: false,
+		saveUninitialized: true,
     cookie: {
       secure: process.env.NODE_ENV === 'production', // Set to true in production
       sameSite: 'none', // Adjust as needed
