@@ -11,8 +11,9 @@ const getterRouter = require("./routers/getterRouter.js");
 const errorMiddleware = require("./middlewares/errorMiddleware.js");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-const RedisStore = require("connect-redis")(session);
 const redis = require("redis");
+const conred = require("connect-redis");
+const RedisStore = conred(session);
 
 const app = express();
 
