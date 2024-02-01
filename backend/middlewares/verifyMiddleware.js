@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const verifyReq = (req,res,next)=>{
     try{
 
-    
+        console.log("user is ------>>>>>>>~~~~~~~~~~~" +req.session.currUser);
         let cookie = req.cookies;
         let user = req.session.currUser;
         // console.log(user);
