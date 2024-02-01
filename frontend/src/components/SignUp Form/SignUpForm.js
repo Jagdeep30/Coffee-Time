@@ -18,7 +18,7 @@ import updatedLogo from './../../assets/updatedLogo.png';
 import { addUserData, loggedIn } from "../../state/action-creators";
 import handleImageUpload from "../../UploadImage";
 
-const baseURL = 'http://localhost:5000/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
 
 const SignUpForm = (props) => {
 

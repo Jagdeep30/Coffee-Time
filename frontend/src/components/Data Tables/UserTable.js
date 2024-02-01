@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./tables.css";
 
-const baseURL = 'http://localhost:5000/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
 
 const UserTable = (props) => {
 	const navigate = useNavigate();

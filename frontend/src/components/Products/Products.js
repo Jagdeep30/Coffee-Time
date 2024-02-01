@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../state/action-creators';
 import downloadImage from '../../DownloadImage';
 
-const baseURL = 'http://localhost:5000/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
 
 const Products = () => {
     const [products,setProducts] = useState([]);

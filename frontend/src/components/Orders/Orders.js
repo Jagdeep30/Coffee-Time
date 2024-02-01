@@ -6,7 +6,7 @@ import { addToCart, deleteFromCart } from '../../state/action-creators';
 import downloadImage from '../../DownloadImage';
 import { useNavigate } from 'react-router-dom';
 
-const baseURL = 'http://localhost:5000/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
 
 const Orders = () => {
   const dispatch = useDispatch();

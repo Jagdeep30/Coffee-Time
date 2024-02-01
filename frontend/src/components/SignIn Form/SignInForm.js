@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import updatedLogo from './../../assets/updatedLogo.png';
 import { addUserData, loggedIn } from "../../state/action-creators";
 
-const baseURL = 'http://localhost:5000/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
 
 axios.defaults.withCredentials = true;
 const SignInForm = () => {
@@ -85,7 +85,7 @@ const SignInForm = () => {
 										 Login
 									</button>
 									<span className='forgot'>
-										{/* {<a href='http://localhost:5000/user/forgotPassword'>Forgot Password?</a>} */}
+										{/* {<a href='https://coffee-time-one.vercel.app/user/forgotPassword'>Forgot Password?</a>} */}
 									</span>
 								</form>
 							</div>

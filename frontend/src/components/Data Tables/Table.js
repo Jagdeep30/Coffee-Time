@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./tables.css";
 import { render } from "react-dom";
 
-const baseURL = 'http://localhost:5000/api/v1/';
+const baseURL = 'https://coffee-time-one.vercel.app/api/v1/';
 
 const Table = (props) => {
 	const navigate = useNavigate();

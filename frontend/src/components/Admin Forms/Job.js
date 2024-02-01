@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const baseURL = "http://localhost:5000/api/v1/";
+const baseURL = "https://coffee-time-one.vercel.app/api/v1/";
 
 const Job = (props) => {
 	const [jobName, setJobName] = useState('');
