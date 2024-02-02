@@ -25,7 +25,7 @@ const verifyReq = (req, res, next) => {
 				"i am in the else statement and this is the data --->" +
 					JSON.stringify(checkUser) +
 					" --> " +
-					user
+					user._id.toString()
 			);
 			console.log(
 				"this is the checkUser ---> " + checkUser._id ==
