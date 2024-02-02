@@ -31,7 +31,7 @@ const verifyReq = (req,res,next)=>{
         }
         else{
             let checkUser = jwt.verify(cookie.token,process.env.JWT_SECRET);
-            console.log("i am in the else statement and this is the data --->"+checkUser+" --> "+user);
+            console.log("i am in the else statement and this is the data --->"+JSON.stringify(checkUser)+" --> "+user);
             console.log("this is the checkUser ---> "+checkUser._id==user._id);
             if(checkUser._id === user._id){
                 next();
