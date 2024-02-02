@@ -30,6 +30,7 @@ app.use(
     cookie: {
       secure: true, // Set to true in production
       sameSite: 'none', // Adjust as needed
+	  maxAge:24*60*60*1000
     },
 	})
 );
