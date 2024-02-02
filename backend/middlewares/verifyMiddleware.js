@@ -28,10 +28,10 @@ const verifyReq = (req, res, next) => {
 					user._id.toString()
 			);
 			console.log(
-				"this is the checkUser ---> " + checkUser._id ==
+				"this is the checkUser ---> " + checkUser._id ===
 					user._id.toString()
 			);
-			if (checkUser._id === user._id) {
+			if (checkUser._id === user._id.toString()) {
 				next();
 			} else {
 				res.status(200).json({
