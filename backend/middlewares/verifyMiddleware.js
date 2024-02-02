@@ -22,7 +22,6 @@ const verifyReq = (req,res,next)=>{
         // console.log(user);
         // console.log(cookie);
         if(user===undefined || !cookie.token){
-            console.log("i am in the if statement and this is the data --->"+user+" --> "+cookie.token);
             res.status(200).json({
                 status:'fail',
                 message:`Login first to access data ---> token is ${user}`
@@ -32,6 +31,7 @@ const verifyReq = (req,res,next)=>{
         }
         else{
             let checkUser = jwt.verify(cookie.token,process.env.JWT_SECRET);
+            console.log("i am in the else statement and this is the data --->"+process.env.JWT_SECRET+" --> "+cookie.token);
             if(checkUser._id === user._id){
                 next();
             }
