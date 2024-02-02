@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const userModel = require('../models/userModel.js');
 const { createToken } = require('./JwtToken.js');
+const { setCurrUser } = require('../middlewares/config.js');
 
 
 exports.addUser = async(req,res,next)=>{
@@ -10,8 +11,9 @@ exports.addUser = async(req,res,next)=>{
         data.password = pass;
         let result = await userModel.create(data);
 
-        req.session.currUser = result;
+        // req.session.currUser = result;
         // console.log(req.session.currUser);
+        setCurrUser(result);
 
         createToken(result,res,'User created Successfully',200);
         // res.status(200).json({
@@ -38,8 +40,9 @@ exports.login = async(req,res,next)=>{
         if(!passMatch) next(new Error("Invalid Credentials"));
 
         // req.session.currUser = user;
-        req.session.currUser = user;
-        console.log("user is -------------->>>>>>>>>>>>>>"+req.session.currUser);
+        // req.session.currUser = user;
+        // console.log("user is -------------->>>>>>>>>>>>>>"+req.session.currUser);
+        setCurrUser(user);
 
         createToken(user,res,"Login Successful",200);
     }catch(err){

@@ -1,12 +1,24 @@
 const jwt = require('jsonwebtoken');
+const { getCurrUser } = require('./config');
 
 
 const verifyReq = (req,res,next)=>{
     try{
 
-        console.log("user is ------>>>>>>>~~~~~~~~~~~" +req.session.currUser);
+        // console.log("user is ------>>>>>>>~~~~~~~~~~~" +req.session.currUser);
         let cookie = req.cookies;
-        let user = req.session.currUser;
+
+
+
+        // let user = req.session.currUser;
+
+        let user = getCurrUser();
+
+
+
+
+
+
         // console.log(user);
         // console.log(cookie);
         if(user===undefined || !cookie.token){
