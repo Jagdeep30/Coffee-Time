@@ -13,16 +13,16 @@ const verifyReq = (req,res,next)=>{
         // let user = req.session.currUser;
 
         let user = getCurrUser();
-        console.log(user);
-
-
-
-
-
-
+        
+        
+        
+        
+        
+        
         // console.log(user);
         // console.log(cookie);
         if(user===undefined || !cookie.token){
+            console.log("i am in the if statement and this is the data --->"+user+" --> "+cookie.token);
             res.status(200).json({
                 status:'fail',
                 message:`Login first to access data ---> token is ${user}`
