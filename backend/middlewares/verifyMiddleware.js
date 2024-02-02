@@ -13,6 +13,7 @@ const verifyReq = (req,res,next)=>{
         // let user = req.session.currUser;
 
         let user = getCurrUser();
+        console.log(user);
 
 
 
