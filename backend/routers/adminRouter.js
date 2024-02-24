@@ -7,15 +7,15 @@ const verifyReq = require("../middlewares/verifyMiddleware.js");
 
 const router = express.Router();
 
-router.route("/states/:id").get(verifyReq,getAllStates); // to get all states according to countryID
-router.route("/cities/:id").get(verifyReq,getAllCities); // to get all cities according to stateID
+router.route("/states/:id").get(getAllStates); // to get all states according to countryID
+router.route("/cities/:id").get(getAllCities); // to get all cities according to stateID
 
 
-router.route("/city/:id").get(verifyReq,getCity); // to get all cities according to stateID
-router.route("/state/:id").get(verifyReq,getState); // to get all cities according to stateID
-router.route("/country/:id").get(verifyReq,getCountry); // to get all cities according to stateID
+router.route("/city/:id").get(getCity); // to get all cities according to stateID
+router.route("/state/:id").get(getState); // to get all cities according to stateID
+router.route("/country/:id").get(getCountry); // to get all cities according to stateID
 
-router.route("/countries").get(verifyReq,getAllCountries);
+router.route("/countries").get(getAllCountries);
 router.route('/products').get(getAllProducts).post(verifyReq,addproduct);
 router.route('/employees').get(verifyReq,getAllEmployees).post(verifyReq,addEmp);
 router.route('/items').get(verifyReq,getAllItems).post(verifyReq,additem);

@@ -37,7 +37,7 @@ app.use(
 
 let options = {
 	// "origin": "http://localhost:3000",
-	origin: "https://coffee-time-omega.vercel.app",
+	origin: ["https://coffee-time-omega.vercel.app"],
 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 	exposedHeaders: ["set-cookie"],
 	credentials: true,
