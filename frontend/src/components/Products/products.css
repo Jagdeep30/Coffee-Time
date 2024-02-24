@@ -51,3 +51,15 @@
 .desc-height{
     height: 8rem;
 }
+
+
+.body-color{
+    background-color:var(--primary-color)
+  }
+  
+  .title{
+    background-color:var(--bg-color)
+  }
+  .title::before{
+    background-color:var(--bg-color)
+  }
