@@ -63,3 +63,15 @@
   .title::before{
     background-color:var(--bg-color)
   }
+
+
+  .addBtn{
+    border: white 0.1rem solid;
+    color: white;
+  }
+
+  .addBtn:hover{
+    background-color:var(--bg-color);
+    color:white;
+    border:white solid 0.1rem;
+  }

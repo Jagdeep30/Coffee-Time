@@ -51,7 +51,7 @@ const Products = () => {
                         <li className="list-group-item fw-bold title" style={{"color":"white"}}>Price : {val.unitPrice}</li>
                     </ul>
                     <div className="card-body body-color">
-                    <button className="btn btn-primary button p-button" onClick={handleAddToCart} value={val._id}>Add to Cart</button>
+                    <button className="btn btn-primary button p-button addBtn" onClick={handleAddToCart} value={val._id}>Add to Cart</button>
                     </div>
                 </div>
             );
