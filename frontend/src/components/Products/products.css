@@ -75,3 +75,9 @@
     color:white;
     border:white solid 0.1rem;
   }
+
+
+  .card-text{
+    line-height: 1.3rem;
+    letter-spacing: 0.05rem;
+  }
