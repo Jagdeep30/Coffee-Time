@@ -48,7 +48,7 @@ const Products = () => {
                         <p className="card-text desc-height" style={{"color":"white"}}>{val.description}</p>
                     </div>
                     <ul className="list-group list-group-flush mb-0 body-color">
-                        <li className="list-group-item fw-bold" style={{"color":"white"}}>Price : {val.unitPrice}</li>
+                        <li className="list-group-item fw-bold title" style={{"color":"white"}}>Price : {val.unitPrice}</li>
                     </ul>
                     <div className="card-body body-color">
                     <button className="btn btn-primary button p-button" onClick={handleAddToCart} value={val._id}>Add to Cart</button>
