@@ -43,14 +43,14 @@ const Products = () => {
             return(
                 <div key={val._id} className="card text-center" style={{"width": "18rem"}}>
                     <img src={val.productImage} className="card-img-top height" alt="..." />
-                    <div className="card-body mb-0">
-                        <h5 className="card-title montserrat product-name">{val.name}</h5>
-                        <p className="card-text desc-height">{val.description}</p>
+                    <div className="card-body mb-0 body-color">
+                        <h5 className="card-title montserrat product-name title">{val.name}</h5>
+                        <p className="card-text desc-height" style={{"color":"white"}}>{val.description}</p>
                     </div>
-                    <ul className="list-group list-group-flush mb-0">
-                        <li className="list-group-item fw-bold">Price : {val.unitPrice}</li>
+                    <ul className="list-group list-group-flush mb-0 body-color">
+                        <li className="list-group-item fw-bold" style={{"color":"white"}}>Price : {val.unitPrice}</li>
                     </ul>
-                    <div className="card-body">
+                    <div className="card-body body-color">
                     <button className="btn btn-primary button p-button" onClick={handleAddToCart} value={val._id}>Add to Cart</button>
                     </div>
                 </div>
